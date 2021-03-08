@@ -32,10 +32,10 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="/opt/javafx-sdk-11.0.2/lib" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15234375" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="project.propCompiler" />
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -89,7 +89,7 @@
       <workItem from="1615158613776" duration="175000" />
       <workItem from="1615159016588" duration="3532000" />
       <workItem from="1615175399552" duration="173000" />
-      <workItem from="1615175611136" duration="2705000" />
+      <workItem from="1615175611136" duration="3475000" />
     </task>
     <servers />
   </component>
