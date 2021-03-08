@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.HomeController">
+   <top>
+      <AnchorPane prefHeight="74.0" prefWidth="600.0" style="-fx-background-color: #F1F2F0;" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" layoutX="95.0" layoutY="22.0" text="Sistema de Gerenciamento de Estoque" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Entrar">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane layoutX="6.0" prefHeight="302.0" prefWidth="600.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+                           <children>
+                              <Label layoutY="59.0" text="Email" />
+                              <TextField fx:id="inputEntrarEmail" layoutY="76.0" onAction="#efetuarLogin" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                              <Label layoutY="115.0" text="Senha" />
+                              <PasswordField fx:id="inputEntrarSenha" layoutY="132.0" onAction="#efetuarLogin" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                              <Label alignment="CENTER" layoutY="27.0" text="Entrar" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="erroLogin" layoutX="296.0" layoutY="177.0" textFill="#e40000" AnchorPane.rightAnchor="56.0" />
+                              <Button layoutX="452.0" layoutY="173.0" mnemonicParsing="false" onAction="#efetuarLogin" text="Entrar" AnchorPane.rightAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Criar conta">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane prefHeight="302.0" prefWidth="600.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+                           <children>
+                              <Label alignment="CENTER" layoutY="14.0" text="Criar conta" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutY="59.0" text="Nome da Empresa" />
+                              <TextField fx:id="inputCadastroNome" layoutY="76.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                              <Label layoutY="109.0" text="Email" />
+                              <TextField fx:id="inputCadastroEmail" layoutY="126.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                              <Label layoutY="165.0" text="Senha" />
+                              <PasswordField fx:id="inputCadastroSenha" layoutY="182.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                              <Button layoutX="452.0" layoutY="223.0" mnemonicParsing="false" onAction="#efetuarCadastro" text="Cadastrar" AnchorPane.rightAnchor="0.0" />
+                              <Label fx:id="successCadastro" layoutX="398.0" layoutY="227.0" textFill="#03bc00" AnchorPane.rightAnchor="74.0" />
+                              <Label fx:id="failedCadastro" layoutX="165.0" layoutY="227.0" textFill="#ff020b" AnchorPane.rightAnchor="74.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+   <bottom>
+      <AnchorPane prefHeight="34.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" layoutX="286.0" layoutY="9.0" text="Created by: Igor Flores" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+         </children>
+      </AnchorPane>
+   </bottom>
+</BorderPane>
