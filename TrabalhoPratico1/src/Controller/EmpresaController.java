@@ -8,30 +8,34 @@ import javafx.scene.control.*;
 
 import java.util.Optional;
 
-/** Controla tudo referente à empresa **/
+/** Controla tudo referente à empresa, classe mãe de ProdutoController e NotaFiscalController **/
 public class EmpresaController implements IProdutos, INotasFiscais {
+    /** Guardará a empresa "logada" */
     protected static Empresa minhaEmpresa;
 
     @FXML protected Label nomeEmpresa;
     @FXML private ListView<Produto> listaProdutos;
     @FXML private ListView<NotaFiscal> listaNFs;
 
+    /**
+     * Inicializa a tela, verificando se a tela é a desejada
+     */
     @FXML protected void initialize(){
-        Main.setListener(new Main.OnChangeScreen() {
-            @Override
-            public void screenChanged(String newScreen, Object userData) {
-                if(newScreen.equals("Empresa")){
-                    if (userData != null)
-                        minhaEmpresa = (Empresa) userData;
-                    atualizarListaProdutos();
-                    atualizarListaNFs();
-                }
-                if (minhaEmpresa != null) nomeEmpresa.setText(minhaEmpresa.getNome() + "!");
+        Main.setListener((newScreen, userData) -> {
+            if(newScreen.equals("Empresa")){
+                if (userData != null)
+                    minhaEmpresa = (Empresa) userData;
+                atualizarListaProdutos();
+                atualizarListaNFs();
             }
+            if (minhaEmpresa != null) nomeEmpresa.setText(minhaEmpresa.getNome() + "!");
         });
     }
 
-    /** INICIO CRUD PRODUTOS */
+    @FXML void goVoltarEmpresa() { Main.changeScreen("Empresa"); }
+    @FXML void efetuarLogout() { Main.changeScreen("Home"); minhaEmpresa = null; }
+
+    /** INICIO CONTROLLER PRODUTOS */
     @FXML void goAdicionarProduto() { Main.changeScreen("ProdutoAdd"); }
     @FXML void goEditarProduto() {
         ObservableList<Produto> ol = listaProdutos.getSelectionModel().getSelectedItems();
@@ -41,7 +45,7 @@ public class EmpresaController implements IProdutos, INotasFiscais {
         }else{
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Editar");
-            alert.setHeaderText("Selecione um item para editar");
+            alert.setHeaderText("Selecione um produto para editar. ");
             alert.showAndWait();
         }
     }
@@ -61,22 +65,34 @@ public class EmpresaController implements IProdutos, INotasFiscais {
         }else{
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Excluir");
-            alert.setHeaderText("Selecione um item para excluir");
+            alert.setHeaderText("Selecione um produto para excluir. ");
             alert.showAndWait();
         }
     }
 
-    /** FIM CRUD PRODUTOS / INICIO CRUD NOTAS FISCAIS */
+    /** FIM CONTROLLER PRODUTOS / INICIO CONTROLLER NOTAS FISCAIS */
+    @FXML void goVisualizarNF() {
+        ObservableList<NotaFiscal> ol = listaNFs.getSelectionModel().getSelectedItems();
+        if(!ol.isEmpty()){
+            NotaFiscal nf = ol.get(0);
+            Main.changeScreen("NotaFiscalSelected", nf);
+        }else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Visualizar");
+            alert.setHeaderText("Selecione uma nota fiscal para visualizar. ");
+            alert.showAndWait();
+        }
+    }
     @FXML void goAdicionarNF() { Main.changeScreen("NotaFiscalAdd"); }
     @FXML void goEditarNF() {
         ObservableList<NotaFiscal> ol = listaNFs.getSelectionModel().getSelectedItems();
         if(!ol.isEmpty()){
             NotaFiscal nf = ol.get(0);
-            Main.changeScreen("ProdutoEdit", nf);
+            Main.changeScreen("NotaFiscalEdit", nf);
         }else{
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Editar");
-            alert.setHeaderText("Selecione um item para editar");
+            alert.setHeaderText("Selecione uma nota fiscal para editar. ");
             alert.showAndWait();
         }
     }
@@ -89,23 +105,21 @@ public class EmpresaController implements IProdutos, INotasFiscais {
             alert.setHeaderText("Certeza que deseja excluir #" + nf.getCodigo() + "?");
             Optional<ButtonType> retorno = alert.showAndWait();
             if(retorno.get() == ButtonType.OK) {
-                minhaEmpresa.getNotasFiscais().remove(nf);
+                if(removeNotaFiscal(nf.getCodigo())){
+                    for(Produto p : nf.getItems().keySet())
+                        addQuantidade(p.getCodigo(), nf.getItems().get(p));
+                }
                 atualizarListaNFs();
+                atualizarListaProdutos();
             }
         }else{
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Excluir");
-            alert.setHeaderText("Selecione um item para excluir");
+            alert.setHeaderText("Selecione uma nota fiscal para excluir. ");
             alert.showAndWait();
         }
     }
-    /** FIM CRUD NOTAS FISCAIS */
-
-    @FXML void goVoltarEmpresa() { Main.changeScreen("Empresa"); }
-    @FXML void efetuarLogout() {
-        Main.changeScreen("Home");
-        minhaEmpresa = null;
-    }
+    /** FIM CONTROLLER NOTAS FISCAIS */
 
     void atualizarListaProdutos(){
         if(listaProdutos == null) listaProdutos = new ListView<>();
@@ -148,10 +162,34 @@ public class EmpresaController implements IProdutos, INotasFiscais {
         }
         return false;
     }
-    public Produto getProduto(int codigo) { return null; }
+    public Produto getProduto(int codigo) {
+        for(Produto p : minhaEmpresa.getProdutos()){
+            if(p.getCodigo() == codigo)
+                return p;
+        }
+        return null;
+    }
     public boolean updateQuantidade(int codigo, double nova) { return false; }
     public boolean updatePreco(int codigo, double novo) { return false; }
-    public boolean addQuantidade(int codigo, double quantidade) { return false; }
-    public boolean subQuantidade(int codigo, double quantidade) { return false; }
+    public boolean addQuantidade(int codigo, double quantidade) {
+        for(Produto p : minhaEmpresa.getProdutos()){
+            if(p.getCodigo() == codigo){
+                p.setQuantidade(p.getQuantidade() + quantidade);
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean subQuantidade(int codigo, double quantidade) {
+        for(Produto p : minhaEmpresa.getProdutos()){
+            if(p.getCodigo() == codigo){
+                double valor = p.getQuantidade() - quantidade;
+                if(valor < 0) return false;
+                p.setQuantidade(valor);
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

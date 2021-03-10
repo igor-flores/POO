@@ -12,20 +12,17 @@ public class ProdutoController extends EmpresaController {
     @FXML private ToggleGroup tipoProduto;
 
     @FXML protected void initialize(){
-        Main.setListener(new Main.OnChangeScreen() {
-            @Override
-            public void screenChanged(String newScreen, Object userData) {
-                if(newScreen.equals("ProdutoEdit")){
-                    if (inputNome != null) {
-                        produtoEdit = (Produto) userData;
-                        setInputsEdit();
-                    }
-
-                }else if(newScreen.equals("ProdutoAdd")){
-                    if (inputNome != null) limpaInputs();
+        Main.setListener((newScreen, userData) -> {
+            if(newScreen.equals("ProdutoEdit")){
+                if (inputNome != null) {
+                    produtoEdit = (Produto) userData;
+                    setInputsEdit();
                 }
-                if (minhaEmpresa != null) nomeEmpresa.setText(minhaEmpresa.getNome() + "!");
+
+            }else if(newScreen.equals("ProdutoAdd")){
+                if (inputNome != null) limpaInputs();
             }
+            if (minhaEmpresa != null) nomeEmpresa.setText(minhaEmpresa.getNome() + "!");
         });
     }
 
@@ -33,8 +30,8 @@ public class ProdutoController extends EmpresaController {
     @FXML void editarProduto() {
         produtoEdit.setNome(inputNome.getText());
         produtoEdit.setDescricao(inputDescricao.getText());
-        produtoEdit.setPreco(Float.parseFloat(inputPreco.getText()));
-        produtoEdit.setQuantidade(Float.parseFloat(inputQtdEstoque.getText()));
+        produtoEdit.setPreco(Double.parseDouble(inputPreco.getText()));
+        produtoEdit.setQuantidade(Double.parseDouble(inputQtdEstoque.getText()));
 
         goVoltarEmpresa();
     }
@@ -44,45 +41,54 @@ public class ProdutoController extends EmpresaController {
         RadioButton radio = (RadioButton) tipoProduto.getSelectedToggle();
         if(radio.getText().equals("Produto por Kg")){
             addProduto(new Produto(
-                    inputNome.getText(),
-                    inputDescricao.getText(),
-                    Float.parseFloat(inputPreco.getText()),
-                    Float.parseFloat(inputQtdEstoque.getText())
+                inputNome.getText(),
+                inputDescricao.getText(),
+                Double.parseDouble(inputPreco.getText()),
+                Double.parseDouble(inputQtdEstoque.getText())
             ));
         }else{
             addProduto(new PerUnid(
-                    inputNome.getText(),
-                    inputDescricao.getText(),
-                    Float.parseFloat(inputPreco.getText()),
-                    Float.parseFloat(inputQtdEstoque.getText())
+                inputNome.getText(),
+                inputDescricao.getText(),
+                Double.parseDouble(inputPreco.getText()),
+                Double.parseDouble(inputQtdEstoque.getText())
             ));
         }
         goVoltarEmpresa();
     }
 
+    /**
+     * Procura por campos obrigatórios não preenchidos
+     * @return true para erros
+     */
     boolean confereInputs(){
-        int erro = 0;
+        boolean erro = false;
         if(inputNome.getText().isEmpty()) {
             msgTitulo.setText("Este campo é obrigatório. ");
-            erro = 1;
+            erro = true;
         } if(inputDescricao.getText().isEmpty()) {
             msgDescricao.setText("Este campo é obrigatório. ");
-            erro = 1;
+            erro = true;
         } if(inputPreco.getText().isEmpty()) {
             msgPreco.setText("Este campo é obrigatório. ");
-            erro = 1;
+            erro = true;
         } if(inputQtdEstoque.getText().isEmpty()) {
             msgQtdEstoque.setText("Este campo é obrigatório. ");
-            erro = 1;
+            erro = true;
         }
-        return (erro == 0);
+        return erro;
     }
+
+    /** Pegará o produtoEditado no momento
+     * Setará os inputs com o produto
+     */
     void setInputsEdit(){
         inputNome.setText(produtoEdit.getNome());
         inputDescricao.setText(produtoEdit.getDescricao());
-        inputPreco.setText(Float.toString(produtoEdit.getPreco()));
-        inputQtdEstoque.setText(Float.toString(produtoEdit.getQuantidade()));
+        inputPreco.setText(Double.toString(produtoEdit.getPreco()));
+        inputQtdEstoque.setText(Double.toString(produtoEdit.getQuantidade()));
     }
+
     void limpaInputs(){
         inputNome.setText("");
         inputDescricao.setText("");

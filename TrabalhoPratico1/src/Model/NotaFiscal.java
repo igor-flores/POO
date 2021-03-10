@@ -8,10 +8,10 @@ public class NotaFiscal {
     private static int quantidadeNotasFiscais = 0;
     private final int codigo;
     private final Date data;
-    private final HashMap<Produto, Integer> items;
+    private final HashMap<Produto, Double> items;
 
     public NotaFiscal(){ this(new HashMap<>()); }
-    public NotaFiscal(HashMap<Produto, Integer> items){
+    public NotaFiscal(HashMap<Produto, Double> items){
         this.codigo = 1000 + quantidadeNotasFiscais;
         this.data = new Date();
         this.items = items;
@@ -22,16 +22,17 @@ public class NotaFiscal {
     public double valorTotal(){
         double total = 0;
         for (Produto p : items.keySet()){
-            int qtd = items.get(p);
+            double qtd = items.get(p);
             total += (p.getPreco() * qtd);
         }
         return total;
     }
 
-    public void addItem(Produto produto, int quantidade){
+    public void addItem(Produto produto, double quantidade){
         this.items.put(produto, quantidade);
     }
     public int getCodigo() { return codigo; }
+    public HashMap<Produto, Double> getItems(){ return items; }
     public String getData() {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         return formatter.format(this.data);

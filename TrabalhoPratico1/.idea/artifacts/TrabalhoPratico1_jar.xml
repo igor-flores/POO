@@ -1,6 +1,9 @@
 <component name="ArtifactManager">
   <artifact type="jar" build-on-make="true" name="TrabalhoPratico1:jar">
-    <output-path>$PROJECT_DIR$/out/TrabalhoPratico1_jar</output-path>
+    <output-path>$PROJECT_DIR$/out/artifacts/TrabalhoPratico1_jar</output-path>
+    <properties id="ant-preprocessing">
+      <options enabled="true" />
+    </properties>
     <root id="archive" name="TrabalhoPratico1.jar">
       <element id="module-output" name="TrabalhoPratico1" />
       <element id="extracted-dir" path="/opt/javafx-sdk-11.0.2/lib/src.zip" path-in-jar="/" />

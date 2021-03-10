@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.EmpresaController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.EmpresaController">
    <left>
       <AnchorPane prefHeight="331.0" prefWidth="214.0" style="-fx-background-color: #f9fafb;" BorderPane.alignment="CENTER">
          <children>
@@ -45,9 +45,9 @@
                               <ListView fx:id="listaProdutos" layoutY="35.0" prefHeight="267.0" prefWidth="386.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0" />
                               <ToolBar prefHeight="37.0" prefWidth="386.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <items>
-                                    <Button mnemonicParsing="false" onAction="#goAdicionarProduto" prefWidth="80.0" text="Adicionar" />
-                                    <Button mnemonicParsing="false" onAction="#goEditarProduto" prefWidth="80.0" text="Editar" />
-                                    <Button mnemonicParsing="false" onAction="#excluirProduto" prefWidth="80.0" text="Excluir" />
+                                    <Button mnemonicParsing="false" onAction="#goAdicionarProduto" prefWidth="90.0" text="Adicionar" />
+                                    <Button mnemonicParsing="false" onAction="#goEditarProduto" prefWidth="90.0" text="Editar" />
+                                    <Button mnemonicParsing="false" onAction="#excluirProduto" prefWidth="90.0" text="Excluir" />
                                  </items>
                               </ToolBar>
                            </children>
@@ -60,9 +60,10 @@
                            <children>
                               <ToolBar prefHeight="37.0" prefWidth="386.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <items>
-                                    <Button mnemonicParsing="false" onAction="#goAdicionarNF" prefWidth="80.0" text="Adicionar" />
-                                    <Button mnemonicParsing="false" onAction="#goEditarNF" prefWidth="80.0" text="Editar" />
-                                    <Button mnemonicParsing="false" onAction="#excluirNF" prefWidth="80.0" text="Excluir" />
+                                    <Button mnemonicParsing="false" onAction="#goVisualizarNF" prefWidth="90.0" text="Visualizar" />
+                                    <Button mnemonicParsing="false" onAction="#goAdicionarNF" prefWidth="90.0" text="Adicionar" />
+                                    <Button mnemonicParsing="false" onAction="#goEditarNF" prefWidth="90.0" text="Editar" />
+                                    <Button mnemonicParsing="false" onAction="#excluirNF" prefWidth="90.0" text="Excluir" />
                                  </items>
                               </ToolBar>
                               <ListView fx:id="listaNFs" layoutY="38.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0" />
