@@ -1,39 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ArtifactsWorkspaceSettings">
-    <artifacts-to-build>
-      <artifact name="TrabalhoPratico1:jar" />
-    </artifacts-to-build>
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="ffc56877-95be-4bdd-96b5-3a5a50a8435b" name="Default Changelist" comment="" />
+    <list default="true" id="c39b1183-5e92-4af1-b947-9dada3e249a5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/javafx_linux.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../TrabalhoPratico2/TrabalhoPratico2.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/TrabalhoPratico1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/TrabalhoPratico1_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Arquivos/Empresas.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Arquivos/NotasFiscais.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Arquivos/Produtos.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TrabalhoPratico1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TrabalhoPratico1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/javafx-swt.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/javafx.base.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/javafx.controls.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/javafx.fxml.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/javafx.graphics.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/javafx.media.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/javafx.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/javafx.swing.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/javafx.web.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/libavplugin-54.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/libavplugin-56.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/libavplugin-57.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/libavplugin-ffmpeg-56.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/libavplugin-ffmpeg-57.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/libdecora_sse.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/libfxplugins.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/libglass.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/libglassgtk2.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/libglassgtk3.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/libgstreamer-lite.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/libjavafx_font.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/libjavafx_font_freetype.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/libjavafx_font_pango.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/libjavafx_iio.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/libjfxmedia.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/libjfxwebkit.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/libprism_common.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/libprism_es2.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/libprism_sw.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/mods/javafx.base.jmod" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/mods/javafx.controls.jmod" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/mods/javafx.fxml.jmod" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/mods/javafx.graphics.jmod" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/mods/javafx.media.jmod" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/mods/javafx.swing.jmod" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/mods/javafx.web.jmod" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/javafx/src.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico1/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/readme.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/EmpresaController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/HomeController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Main$OnChangeScreen.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/NotaFiscalController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/NotaFiscalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/NotaFiscalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProdutoController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProdutoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProdutoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interfaces/INotasFiscais.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interfaces/IProdutos.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Empresa.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Empresa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Empresa.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/NotaFiscal.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/PerUnid.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Produto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Produto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Produto.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="CodeInsightWorkspaceSettings">
-    <option name="optimizeImportsOnTheFly" value="true" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="GitSEFilterConfiguration">
-    <file-type-list>
-      <filtered-out-file-type name="LOCAL_BRANCH" />
-      <filtered-out-file-type name="REMOTE_BRANCH" />
-      <filtered-out-file-type name="TAG" />
-      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
-    </file-type-list>
-  </component>
-  <component name="ProjectId" id="1pRu13rFwFvYV6sQnpGU0uCrvxw" />
+  <component name="ProjectId" id="1q0I5Xc5olCxnFOIt6Cd81mwTVb" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -42,51 +88,25 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/View" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../TrabalhoPratico2" />
     <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.15234375" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/View" />
-    </key>
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Controller.Main" />
       <module name="TrabalhoPratico1" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;$PROJECT_DIR$/../POO/TrabalhoPratico1/javafx/&quot; --add-modules javafx.controls,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path $PROJECT_DIR$/javafx-linux/ --add-modules javafx.controls,javafx.fxml" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="Controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
-        <pattern>
-          <option name="PATTERN" value="Interfaces.*" />
-          <option name="ENABLED" value="false" />
-        </pattern>
-        <pattern>
-          <option name="PATTERN" value="Model.*" />
-          <option name="ENABLED" value="false" />
-        </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -100,22 +120,13 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="ffc56877-95be-4bdd-96b5-3a5a50a8435b" name="Default Changelist" comment="" />
-      <created>1615158010968</created>
+      <changelist id="c39b1183-5e92-4af1-b947-9dada3e249a5" name="Default Changelist" comment="" />
+      <created>1616209897684</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1615158010968</updated>
-      <workItem from="1615158013544" duration="565000" />
-      <workItem from="1615158613776" duration="175000" />
-      <workItem from="1615159016588" duration="3532000" />
-      <workItem from="1615175399552" duration="173000" />
-      <workItem from="1615175611136" duration="4174000" />
-      <workItem from="1615183627735" duration="2221000" />
-      <workItem from="1615226291884" duration="1049000" />
-      <workItem from="1615227405090" duration="2002000" />
-      <workItem from="1615311826337" duration="582000" />
-      <workItem from="1615339174667" duration="12117000" />
-      <workItem from="1615400509386" duration="12793000" />
+      <updated>1616209897684</updated>
+      <workItem from="1616209899342" duration="140000" />
+      <workItem from="1616318671616" duration="307000" />
     </task>
     <servers />
   </component>
