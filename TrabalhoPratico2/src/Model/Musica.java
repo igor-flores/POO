@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Musica extends MidiaReproducao{
     ArrayList<Pessoa> autores;
@@ -10,10 +11,10 @@ public class Musica extends MidiaReproducao{
         String caminhoArquivo,
         String titulo,
         String descricao,
+        Date ano,
         String genero,
         String idioma,
         String duracao,
-        int ano,
         ArrayList<Pessoa> autores,
         ArrayList<Pessoa> interpretes
     ){

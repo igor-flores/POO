@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Filme extends MidiaReproducao{
     private Pessoa diretor;
@@ -13,7 +14,7 @@ public class Filme extends MidiaReproducao{
         String genero,
         String idioma,
         String duracao,
-        int ano,
+        Date ano,
         Pessoa diretor,
         ArrayList<Pessoa> autoresPrincipais
     ){
@@ -27,4 +28,8 @@ public class Filme extends MidiaReproducao{
 
     public void setDiretor(Pessoa diretor) { this.diretor = diretor; }
     public void setAutoresPrincipais(ArrayList<Pessoa> autoresPrincipais) { this.autoresPrincipais = autoresPrincipais; }
+
+    public String toString(){
+        return this.getData() + " - " + this.titulo;
+    }
 }

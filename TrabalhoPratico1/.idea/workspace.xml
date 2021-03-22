@@ -2,74 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c39b1183-5e92-4af1-b947-9dada3e249a5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/javafx_linux.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../TrabalhoPratico2/TrabalhoPratico2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/TrabalhoPratico1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/TrabalhoPratico1_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../TrabalhoPratico2/src/Controller/HomeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../TrabalhoPratico2/src/Model/BancoMidia.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../TrabalhoPratico2/src/View/Visualizar.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Arquivos/Empresas.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Arquivos/NotasFiscais.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Arquivos/Produtos.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TrabalhoPratico1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TrabalhoPratico1.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/javafx-swt.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/javafx.base.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/javafx.controls.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/javafx.fxml.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/javafx.graphics.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/javafx.media.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/javafx.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/javafx.swing.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/javafx.web.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/libavplugin-54.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/libavplugin-56.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/libavplugin-57.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/libavplugin-ffmpeg-56.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/libavplugin-ffmpeg-57.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/libdecora_sse.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/libfxplugins.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/libglass.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/libglassgtk2.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/libglassgtk3.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/libgstreamer-lite.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/libjavafx_font.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/libjavafx_font_freetype.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/libjavafx_font_pango.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/libjavafx_iio.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/libjfxmedia.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/libjfxwebkit.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/libprism_common.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/libprism_es2.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/libprism_sw.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/mods/javafx.base.jmod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/mods/javafx.controls.jmod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/mods/javafx.fxml.jmod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/mods/javafx.graphics.jmod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/mods/javafx.media.jmod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/mods/javafx.swing.jmod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/mods/javafx.web.jmod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javafx/src.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico1/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/readme.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/EmpresaController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/HomeController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Main$OnChangeScreen.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/NotaFiscalController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/NotaFiscalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/NotaFiscalController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ProdutoController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ProdutoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProdutoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Interfaces/INotasFiscais.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Interfaces/IProdutos.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Empresa.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Empresa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Empresa.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/NotaFiscal.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/PerUnid.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Produto.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Produto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Produto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TrabalhoPratico2/src/Controller/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../TrabalhoPratico2/src/Controller/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TrabalhoPratico2/src/Model/Filme.java" beforeDir="false" afterPath="$PROJECT_DIR$/../TrabalhoPratico2/src/Model/Filme.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TrabalhoPratico2/src/Model/Foto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../TrabalhoPratico2/src/Model/Foto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TrabalhoPratico2/src/Model/Midia.java" beforeDir="false" afterPath="$PROJECT_DIR$/../TrabalhoPratico2/src/Model/Midia.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TrabalhoPratico2/src/Model/MidiaReproducao.java" beforeDir="false" afterPath="$PROJECT_DIR$/../TrabalhoPratico2/src/Model/MidiaReproducao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TrabalhoPratico2/src/Model/Musica.java" beforeDir="false" afterPath="$PROJECT_DIR$/../TrabalhoPratico2/src/Model/Musica.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,6 +69,8 @@
       <updated>1616209897684</updated>
       <workItem from="1616209899342" duration="140000" />
       <workItem from="1616318671616" duration="307000" />
+      <workItem from="1616321575470" duration="4654000" />
+      <workItem from="1616337968813" duration="12000" />
     </task>
     <servers />
   </component>
