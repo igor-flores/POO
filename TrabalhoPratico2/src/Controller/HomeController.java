@@ -1,23 +1,20 @@
 package Controller;
 
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import java.io.IOException;
+import java.util.*;
+
+import javafx.fxml.*;
+import javafx.scene.*;
 import javafx.scene.control.*;
-import Model.*;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Comparator;
+import Model.*;
 
 public class HomeController {
     @FXML private Tab tabFotos, tabFilmes, tabMusicas;
     @FXML private ListView<Midia> listaFotos, listaFilmes, listaMusicas;
     @FXML private ChoiceBox<String> selectFiltroFilme, selectFiltroMusica;
     @FXML private RadioButton ordenaTituloFoto, ordenaTituloFilme, ordenaTituloMusica;
-
 
     /**
      * Inicializa a tela, verificando se a tela é a desejada
@@ -48,24 +45,22 @@ public class HomeController {
     @FXML void ordenar() {
         if (tabFotos.isSelected()) {
             ordenarMidia(Main.banco.getFotos(), ordenaTituloFoto.isSelected());
-        }else if (tabFilmes.isSelected()) {
+        } else if (tabFilmes.isSelected()) {
             if(selectFiltroFilme.getValue() != null) {
                 ArrayList<Midia> listaFiltro = setaListaFiltro("Filme", selectFiltroFilme.getValue());
                 ordenarMidia(listaFiltro, ordenaTituloFilme.isSelected());
                 listaFilmes.getItems().clear();
                 listaFilmes.getItems().addAll(listaFiltro);
-            }else {
-                ordenarMidia(Main.banco.getFilmes(), ordenaTituloFilme.isSelected());
-            }
-        }else if (tabMusicas.isSelected()) {
+            } else ordenarMidia(Main.banco.getFilmes(), ordenaTituloFilme.isSelected());
+
+        } else if (tabMusicas.isSelected()) {
             if(selectFiltroMusica.getValue() != null) {
                 ArrayList<Midia> listaFiltro = setaListaFiltro("Musica", selectFiltroMusica.getValue());
                 ordenarMidia(listaFiltro, ordenaTituloMusica.isSelected());
                 listaFilmes.getItems().clear();
                 listaFilmes.getItems().addAll(listaFiltro);
-            }else {
-                ordenarMidia(Main.banco.getMusicas(), ordenaTituloMusica.isSelected());
-            }
+            } else ordenarMidia(Main.banco.getMusicas(), ordenaTituloMusica.isSelected());
+
         }
         atualizarListas();
     }
@@ -81,8 +76,8 @@ public class HomeController {
         ordenar();
     }
 
-    @FXML void btnFiltroMusica() {
-    }
+    @FXML void btnFiltroMusica() { }
+
     void atualizarListas(){
         if(listaFotos == null) listaFotos = new ListView<>();
         if(listaFilmes == null) listaFilmes = new ListView<>();
