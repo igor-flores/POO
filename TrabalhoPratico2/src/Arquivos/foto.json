@@ -1,0 +1,47 @@
+{
+  "teste": "oi",
+  "fotos": [
+    {
+      "caminhoArquivo": "",
+      "titulo": "oi",
+      "descricao": "",
+      "data": "",
+      "fotografo": "",
+      "local": "",
+      "pessoas": ["", ""]
+    },
+    {
+      "caminhoArquivo": "",
+      "titulo": "aa",
+      "descricao": "",
+      "data": "",
+      "fotografo": "",
+      "local": "",
+      "pessoas": ["", ""]
+    }
+  ],
+  "filmes": [
+    {
+      "codigo": 0,
+      "caminhoArquivo": "",
+      "titulo": "",
+      "descricao": "",
+      "genero": "",
+      "idioma": "",
+      "autores": ["", ""],
+      "diretor": ""
+    }
+  ],
+  "musicas": [
+    {
+      "codigo": 0,
+      "caminhoArquivo": "",
+      "titulo": "",
+      "descricao": "",
+      "genero": "",
+      "idioma": "",
+      "autores": ["", ""],
+      "interpretes": ["", ""]
+    }
+  ]
+}

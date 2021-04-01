@@ -20,12 +20,12 @@ public class HomeController {
      * Inicializa a tela, verificando se a tela é a desejada
      */
     @FXML protected void initialize(){
-        selectFiltroFilme.getItems().addAll(Main.banco.getGeneroFilme());
-        selectFiltroMusica.getItems().addAll(Main.banco.getGeneroMusica());
-        ordenarMidia(Main.banco.getFotos(), true);
-        ordenarMidia(Main.banco.getFilmes(), true);
-        ordenarMidia(Main.banco.getMusicas(), true);
+        selectFiltroFilme.getItems().addAll(Main.banco.getListGenero());
+        selectFiltroMusica.getItems().addAll(Main.banco.getListGenero());
 
+        ordenarMidia(getListMidia(Foto.class), true);
+        ordenarMidia(getListMidia(Filme.class), true);
+        ordenarMidia(getListMidia(Musica.class), true);
         atualizarListas();
     }
     @FXML void visualizar() throws IOException {
@@ -43,32 +43,28 @@ public class HomeController {
     @FXML void excluir() { }
 
     @FXML void ordenar() {
+        ArrayList<Midia> listaFiltro = new ArrayList<>();
         if (tabFotos.isSelected()) {
-            ordenarMidia(Main.banco.getFotos(), ordenaTituloFoto.isSelected());
+            listaFiltro = getListMidia(Foto.class);
         } else if (tabFilmes.isSelected()) {
-            if(selectFiltroFilme.getValue() != null) {
-                ArrayList<Midia> listaFiltro = setaListaFiltro("Filme", selectFiltroFilme.getValue());
-                ordenarMidia(listaFiltro, ordenaTituloFilme.isSelected());
-                listaFilmes.getItems().clear();
-                listaFilmes.getItems().addAll(listaFiltro);
-            } else ordenarMidia(Main.banco.getFilmes(), ordenaTituloFilme.isSelected());
-
+            if (selectFiltroFilme.getValue() != null)
+                listaFiltro = ordenarMidia (listaFiltrada(Filme.class, selectFiltroFilme.getValue()), ordenaTituloFilme.isSelected());
+            else
+                listaFiltro = ordenarMidia (getListMidia(Filme.class), ordenaTituloFilme.isSelected());
         } else if (tabMusicas.isSelected()) {
-            if(selectFiltroMusica.getValue() != null) {
-                ArrayList<Midia> listaFiltro = setaListaFiltro("Musica", selectFiltroMusica.getValue());
-                ordenarMidia(listaFiltro, ordenaTituloMusica.isSelected());
-                listaFilmes.getItems().clear();
-                listaFilmes.getItems().addAll(listaFiltro);
-            } else ordenarMidia(Main.banco.getMusicas(), ordenaTituloMusica.isSelected());
-
+            if (selectFiltroMusica.getValue() != null)
+                listaFiltro = ordenarMidia (listaFiltrada(Musica.class, selectFiltroMusica.getValue()), ordenaTituloFilme.isSelected());
+            else
+                listaFiltro = ordenarMidia (getListMidia(Musica.class), ordenaTituloMusica.isSelected());
         }
-        atualizarListas();
+        atualizarLista(listaFiltro);
     }
-    @FXML void btnFiltroFilme() {
+
+    @FXML void btnFiltrarFilme() {
         if(selectFiltroFilme.getValue() != null) {
-            ArrayList<Midia> listaFiltro = setaListaFiltro("Filme", selectFiltroFilme.getValue());
-            listaFilmes.getItems().clear();
-            listaFilmes.getItems().addAll(listaFiltro);
+            ArrayList<Midia> listaFiltro = listaFiltrada(Filme.class, selectFiltroFilme.getValue());
+            atualizarLista(listaFiltro);
+            ordenar();
         }
     }
     @FXML void limparFiltroFilme() {
@@ -78,56 +74,81 @@ public class HomeController {
 
     @FXML void btnFiltroMusica() { }
 
-    void atualizarListas(){
+    void inicializaListViews(){
         if(listaFotos == null) listaFotos = new ListView<>();
         if(listaFilmes == null) listaFilmes = new ListView<>();
         if(listaMusicas == null) listaMusicas = new ListView<>();
+    }
+
+    void atualizarListas(){
+        inicializaListViews();
 
         listaFotos.getItems().clear();
         listaFilmes.getItems().clear();
         listaMusicas.getItems().clear();
 
-        for (Midia m : Main.banco.getFotos())
-            listaFotos.getItems().add(m);
-
-        for (Midia m : Main.banco.getFilmes())
-            listaFilmes.getItems().add(m);
-
+        for(Midia m : Main.banco.getMidias()){
+            if (m instanceof Foto)
+                listaFotos.getItems().add(m);
+            else if (m instanceof Filme)
+                listaFilmes.getItems().add(m);
+            else
+                listaMusicas.getItems().add(m);
+        }
     }
 
-    void ordenarMidia(ArrayList<Midia> list, boolean ordenarTitulo){
-        if (list.isEmpty()) return;
+    void atualizarLista(ArrayList<Midia> list){
+        inicializaListViews();
+
+        if (list.size() > 0) {
+            if (list.get(0) instanceof Foto) {
+                listaFotos.getItems().clear();
+                listaFotos.getItems().addAll(list);
+            } else if (list.get(0) instanceof Filme) {
+                listaFilmes.getItems().clear();
+                listaFilmes.getItems().addAll(list);
+            } else if (list.get(0) instanceof Musica) {
+                listaMusicas.getItems().clear();
+                listaMusicas.getItems().addAll(list);
+            }
+        }
+    }
+
+    ArrayList<Midia> getListMidia(Class midia){
+        ArrayList<Midia> list = new ArrayList<>();
+
+        for (Midia m : Main.banco.getMidias()){
+            if ((midia == Foto.class) && (m instanceof Foto))
+                list.add(m);
+            else if ((midia == Filme.class) && (m instanceof Filme))
+                list.add(m);
+        }
+
+        return list;
+    }
+
+    ArrayList<Midia> ordenarMidia(ArrayList<Midia> list, boolean ordenarTitulo){
+        if (list.isEmpty()) return null;
 
         if(ordenarTitulo)
             list.sort(Comparator.comparing(Midia::getTitulo));
         else
             list.sort(Comparator.comparing(Midia::getData));
 
-        if(list.get(0) instanceof Foto)
-            Main.banco.setFotos(list);
-        else if(list.get(0) instanceof Filme)
-            Main.banco.setFilmes(list);
-        else if(list.get(0) instanceof Musica)
-            Main.banco.setMusicas(list);
+        return list;
     }
 
-    ArrayList<Midia> setaListaFiltro(String midia, String filtro){
+    ArrayList<Midia> listaFiltrada(Class midia, String filtro){
         ArrayList<Midia> listaFiltro = new ArrayList<>();
 
-        if(midia.equals("Filme")){
-            for (Midia m : Main.banco.getFilmes()){
-                Filme f = (Filme) m;
-                if(f.getGenero().equals(filtro))
-                    listaFiltro.add(m);
-            }
-        }else if (midia.equals("Musica")){
-            for (Midia m : Main.banco.getFilmes()){
-                Musica musica = (Musica) m;
-                if(musica.getGenero().equals(filtro))
-                    listaFiltro.add(musica);
-            }
+        for (Midia m : Main.banco.getMidias()){
+            if (
+                (midia == Filme.class) &&
+                (m instanceof MidiaReproducao) &&
+                ((MidiaReproducao) m).getGenero().equals(filtro)
+            ) listaFiltro.add(m);
         }
+
         return listaFiltro;
     }
-
 }

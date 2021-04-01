@@ -12,6 +12,7 @@ import Model.*;
 public class Main extends Application {
     private static Stage stage;
     private static Scene homeScene;
+    private static String nome = "igor";
 
     public static BancoMidia banco;
     private static final ArrayList<OnChangeScreen> listeners = new ArrayList<>();
@@ -30,62 +31,9 @@ public class Main extends Application {
 
     /** Setando empresas com produtos */
     public static void main(String[] args) {
-        banco = new BancoMidia();
-        ArrayList<Pessoa> pessoas = new ArrayList<>();
-        Pessoa vo = new Pessoa("Vó");
-        Pessoa eu = new Pessoa("Guinho");
-        pessoas.add(vo);
-        pessoas.add(eu);
-        banco.getFotos().add(
-            new Foto(
-                "/pasta/imagem/",
-                "Goi",
-                "goi da vovó",
-                new Date(),
-                vo,
-                "casa da vovó",
-                pessoas
-            )
-        );
-        banco.getFotos().add(
-            new Foto(
-                "/pasta/imagem/",
-                "Abar",
-                "goi da vovó",
-                new Date("2021/07/15"),
-                vo,
-                "casa da vovó",
-                pessoas
-            )
-        );
-        banco.getFilmes().add(
-            new Filme(
-                "/pasta/filme/",
-                "Procurando nemo",
-                "blá blá blá",
-                "infantil",
-                "português",
-                "120h",
-                new Date("2018/01/01"),
-                eu,
-                pessoas
-            )
-        );
-        banco.getFilmes().add(
-            new Filme(
-                "/pasta/filme/",
-                "As aventuras de PI",
-                "blá blá blá",
-                "aventura",
-                "português",
-                "120h",
-                new Date("2020/01/01"),
-                eu,
-                pessoas
-            )
-        );
+//        Connect.conector();
 
-        launch(args);
+//        launch(args);
     }
 
     /**

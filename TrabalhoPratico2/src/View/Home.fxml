@@ -45,7 +45,7 @@
                         <RadioButton fx:id="ordenaData" layoutX="184.0" layoutY="54.0" mnemonicParsing="false" onAction="#ordenar" text="Data" toggleGroup="$ordenacaoFilme" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="53.0" />
                         <ListView fx:id="listaFilmes" layoutX="209.0" layoutY="83.0" prefHeight="244.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0" />
                         <ChoiceBox fx:id="selectFiltroFilme" layoutX="181.0" layoutY="171.0" prefHeight="26.0" prefWidth="299.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="14.0" />
-                        <Button layoutX="524.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnFiltroFilme" prefWidth="100.0" text="Filtrar" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="14.0" />
+                        <Button layoutX="524.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnFiltrarFilme" prefWidth="100.0" text="Filtrar" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="14.0" />
                         <Label layoutX="500.0" layoutY="45.0" onMouseClicked="#limparFiltroFilme" text="Limpar filtro" textFill="#3902e0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="45.0" />
                      </children></AnchorPane>
             </content>

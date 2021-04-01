@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Filme extends MidiaReproducao{
-    private Pessoa diretor;
-    private ArrayList<Pessoa> autoresPrincipais;
+    private String diretor;
 
     public Filme(
         String caminhoArquivo,
@@ -15,19 +14,16 @@ public class Filme extends MidiaReproducao{
         String idioma,
         String duracao,
         Date ano,
-        Pessoa diretor,
-        ArrayList<Pessoa> autoresPrincipais
+        String diretor,
+        ArrayList<String> autoresPrincipais
     ){
-        super(caminhoArquivo, titulo, descricao, genero, idioma, duracao, ano);
+        super(caminhoArquivo, titulo, descricao, genero, idioma, duracao, ano, autoresPrincipais);
         this.diretor = diretor;
-        this.autoresPrincipais = autoresPrincipais;
     }
 
-    public Pessoa getDiretor() { return diretor; }
-    public ArrayList<Pessoa> getAutoresPrincipais() { return autoresPrincipais; }
+    public String getDiretor() { return diretor; }
 
-    public void setDiretor(Pessoa diretor) { this.diretor = diretor; }
-    public void setAutoresPrincipais(ArrayList<Pessoa> autoresPrincipais) { this.autoresPrincipais = autoresPrincipais; }
+    public void setDiretor(String diretor) { this.diretor = diretor; }
 
     public String toString(){
         return this.getData() + " - " + this.titulo;

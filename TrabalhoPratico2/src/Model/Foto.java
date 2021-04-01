@@ -1,23 +1,21 @@
 package Model;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Foto extends Midia{
-    private Pessoa fotografo;
+    private String fotografo;
     private String local;
-    private ArrayList<Pessoa> pessoas;
-    private Date data;
+    private ArrayList<String> pessoas;
 
     public Foto(
         String caminhoArquivo,
         String titulo,
         String descricao,
         Date data,
-        Pessoa fotografo,
+        String fotografo,
         String local,
-        ArrayList<Pessoa> pessoas
+        ArrayList<String> pessoas
     ){
         super(caminhoArquivo, titulo, descricao, data);
         this.fotografo = fotografo;
@@ -26,14 +24,15 @@ public class Foto extends Midia{
         this.data = new Date();
     }
 
-    public Pessoa getFotografo() { return fotografo; }
+    public String getFotografo() { return fotografo; }
     public String getLocal() { return local; }
-    public ArrayList<Pessoa> getPessoas() { return pessoas; }
+    public ArrayList<String> getPessoas() { return pessoas; }
 
-    public void setFotografo(Pessoa fotografo) { this.fotografo = fotografo; }
+    public void setFotografo(String fotografo) { this.fotografo = fotografo; }
     public void setLocal(String local) { this.local = local; }
-    public void setPessoas(ArrayList<Pessoa> pessoas) { this.pessoas = pessoas; }
+    public void setPessoas(ArrayList<String> Strings) { this.pessoas = Strings; }
 
+    @Override
     public String toString(){
         return  getData() + " - " + this.titulo;
     }

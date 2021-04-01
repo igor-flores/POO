@@ -3,40 +3,22 @@ package Model;
 import java.util.ArrayList;
 
 public class BancoMidia {
-    private ArrayList<Midia> fotos;
-    private ArrayList<Midia> filmes;
-    private ArrayList<Midia> musicas;
+    private ArrayList<Midia> midias;
 
     public BancoMidia(){
-        fotos = new ArrayList<>();
-        filmes = new ArrayList<>();
-        musicas = new ArrayList<>();
+        midias = new ArrayList<>();
     }
 
-    public ArrayList<Midia> getFotos() { return fotos; }
-    public ArrayList<Midia> getFilmes() { return filmes; }
-    public ArrayList<Midia> getMusicas() { return musicas; }
+    public void setMidias(ArrayList<Midia> midias) { this.midias = midias; }
 
-    public void setFotos(ArrayList<Midia> fotos) { this.fotos = fotos; }
-    public void setFilmes(ArrayList<Midia> filmes) { this.filmes = filmes; }
-    public void setMusicas(ArrayList<Midia> musicas) { this.musicas = musicas; }
+    public ArrayList<Midia> getMidias() { return midias; }
 
-    public ArrayList<String> getGeneroFilme(){
+    public ArrayList<String> getListGenero(){
         ArrayList<String> generos = new ArrayList<>();
 
-        for (Midia m: filmes) {
-            Filme f = (Filme) m;
-            generos.add(f.getGenero());
-        }
-
-        return generos;
-    }
-    public ArrayList<String> getGeneroMusica(){
-        ArrayList<String> generos = new ArrayList<>();
-
-        for (Midia m: musicas) {
-            Musica musica = (Musica) m;
-            generos.add(musica.getGenero());
+        for (Midia m: midias) {
+            if(m instanceof MidiaReproducao)
+                generos.add(((MidiaReproducao) m).getGenero());
         }
 
         return generos;

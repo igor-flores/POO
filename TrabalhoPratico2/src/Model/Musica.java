@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Musica extends MidiaReproducao{
-    ArrayList<Pessoa> autores;
-    ArrayList<Pessoa> interpretes;
+    ArrayList<String> interpretes;
 
     public Musica(
         String caminhoArquivo,
@@ -15,17 +14,17 @@ public class Musica extends MidiaReproducao{
         String genero,
         String idioma,
         String duracao,
-        ArrayList<Pessoa> autores,
-        ArrayList<Pessoa> interpretes
+        ArrayList<String> autores,
+        ArrayList<String> interpretes
     ){
-        super(caminhoArquivo, titulo, descricao, genero, idioma, duracao, ano);
+        super(caminhoArquivo, titulo, descricao, genero, idioma, duracao, ano, autores);
         this.autores = autores;
         this.interpretes = interpretes;
     }
 
-    public ArrayList<Pessoa> getAutores() { return autores; }
-    public ArrayList<Pessoa> getInterpretes() { return interpretes; }
+    public ArrayList<String> getAutores() { return autores; }
+    public ArrayList<String> getInterpretes() { return interpretes; }
 
-    public void setAutores(ArrayList<Pessoa> autores) { this.autores = autores; }
-    public void setInterpretes(ArrayList<Pessoa> interpretes) { this.interpretes = interpretes; }
+    public void setAutores(ArrayList<String> autores) { this.autores = autores; }
+    public void setInterpretes(ArrayList<String> interpretes) { this.interpretes = interpretes; }
 }

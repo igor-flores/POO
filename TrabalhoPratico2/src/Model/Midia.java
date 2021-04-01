@@ -3,7 +3,7 @@ package Model;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public abstract class Midia {
+public abstract class Midia extends Connect{
     private static int totalMidias = 0;
     protected final int codigo;
     protected String caminhoArquivo, titulo, descricao;
