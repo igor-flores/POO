@@ -2,19 +2,17 @@ package Controller;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.util.*;
 
-import Model.*;
-
 public class Main extends Application {
     private static Stage stage;
-    private static Scene homeScene;
-    private static String nome = "igor";
+    private static Scene homeScene, fotoViewScene, fotoCreateScene, filmeViewScene;
 
-    public static BancoMidia banco;
     private static final ArrayList<OnChangeScreen> listeners = new ArrayList<>();
 
     /** Setando telas */
@@ -22,18 +20,27 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         stage = primaryStage;
         primaryStage.setTitle("Trabalho Prático");
+        primaryStage.setMaximized(true);
 
-        homeScene = new Scene(FXMLLoader.load(getClass().getResource("../View/Home.fxml")), 1000, 600);
+        /** Bug ao mudar scene
+         * https://stackoverflow.com/questions/41606606/start-the-application-window-maximized-in-javafx-fxml-not-working-properly
+         */
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds();
+        primaryStage.setWidth(bounds.getWidth());
+        primaryStage.setHeight(bounds.getHeight());
+
+        homeScene = new Scene(FXMLLoader.load(getClass().getResource("../View/Home.fxml")));
+        fotoViewScene = new Scene(FXMLLoader.load(getClass().getResource("../View/FotoVisualizar.fxml")));
+        fotoCreateScene = new Scene(FXMLLoader.load(getClass().getResource("../View/FotoCreate.fxml")));
+        filmeViewScene = new Scene(FXMLLoader.load(getClass().getResource("../View/FilmeVisualizar.fxml")));
 
         primaryStage.setScene(homeScene);
         primaryStage.show();
     }
 
-    /** Setando empresas com produtos */
     public static void main(String[] args) {
-//        Connect.conector();
-
-//        launch(args);
+        launch(args);
     }
 
     /**
@@ -41,8 +48,11 @@ public class Main extends Application {
      * @param screen = passa o "nome" da tela desejada
      * @param userData = parametro Opcional
      */
-    public static void changeScreen(String screen, Object userData){
+    public static void changeScreen(String screen, ArrayList<String> userData){
         switch (screen){
+            case "fotoVisualizar": stage.setScene(fotoViewScene); break;
+            case "fotoCreate": stage.setScene(fotoCreateScene); break;
+            case "filmeVisualizar": stage.setScene(filmeViewScene); break;
             default: stage.setScene(homeScene);
         }
         notifyAllListeners(screen, userData);
@@ -53,7 +63,7 @@ public class Main extends Application {
     /**
      * Esta interface obriga todos os controllers a receber a tela atual bem como um parametro
      */
-    public interface OnChangeScreen{ void screenChanged(String newScreen, Object userData); }
+    public interface OnChangeScreen{ void screenChanged(String newScreen, ArrayList<String> userData); }
 
     /**
      *
@@ -66,7 +76,7 @@ public class Main extends Application {
      * @param newScreen = tela atual
      * @param userData = algum objeto, podendo ser nulo ou não
      */
-    private static void notifyAllListeners(String newScreen, Object userData){
+    private static void notifyAllListeners(String newScreen, ArrayList<String> userData){
         for (OnChangeScreen l : listeners)
             l.screenChanged(newScreen, userData);
     }

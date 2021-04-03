@@ -4,10 +4,8 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -20,14 +18,10 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <RadioButton fx:id="ordenaTituloFoto" layoutX="118.0" layoutY="31.0" mnemonicParsing="false" onAction="#ordenar" selected="true" text="Titulo" AnchorPane.leftAnchor="118.0" AnchorPane.topAnchor="31.0">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="ordenacao" />
-                           </toggleGroup>
-                        </RadioButton>
-                        <Label layoutX="14.0" layoutY="31.0" text="Ordenar por:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="31.0" />
-                        <RadioButton fx:id="ordenaData" layoutX="200.0" layoutY="31.0" mnemonicParsing="false" onAction="#ordenar" text="Data" toggleGroup="$ordenacao" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="31.0" />
+                        <Label layoutX="14.0" layoutY="31.0" text="Ordenar por:" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="31.0" />
                         <ListView fx:id="listaFotos" layoutX="8.0" layoutY="85.0" prefHeight="277.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0" />
+                        <ChoiceBox fx:id="ordenacaoFoto" layoutX="108.0" layoutY="26.0" prefWidth="150.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="120.0" />
+                        <Button layoutX="486.0" layoutY="26.0" mnemonicParsing="false" onAction="#buscarFoto" prefWidth="100.0" text="Buscar" AnchorPane.rightAnchor="10.0" />
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -36,17 +30,11 @@
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <Label layoutX="14.0" layoutY="19.0" text="Filtrar por genero: " AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="19.0" />
-                        <RadioButton fx:id="ordenaTituloFilme" layoutX="27.0" layoutY="108.0" mnemonicParsing="false" onAction="#ordenar" selected="true" text="Titulo" AnchorPane.leftAnchor="118.0" AnchorPane.topAnchor="53.0">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="ordenacaoFilme" />
-                           </toggleGroup>
-                        </RadioButton>
-                        <Label layoutX="112.0" layoutY="82.0" text="Ordenar por:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="54.0" />
-                        <RadioButton fx:id="ordenaData" layoutX="184.0" layoutY="54.0" mnemonicParsing="false" onAction="#ordenar" text="Data" toggleGroup="$ordenacaoFilme" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="53.0" />
+                        <Label layoutX="53.0" layoutY="54.0" text="Ordenar por:" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="54.0" />
                         <ListView fx:id="listaFilmes" layoutX="209.0" layoutY="83.0" prefHeight="244.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0" />
                         <ChoiceBox fx:id="selectFiltroFilme" layoutX="181.0" layoutY="171.0" prefHeight="26.0" prefWidth="299.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="14.0" />
-                        <Button layoutX="524.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnFiltrarFilme" prefWidth="100.0" text="Filtrar" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="14.0" />
-                        <Label layoutX="500.0" layoutY="45.0" onMouseClicked="#limparFiltroFilme" text="Limpar filtro" textFill="#3902e0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="45.0" />
+                        <Button layoutX="486.0" layoutY="31.0" mnemonicParsing="false" onAction="#buscarFilme" prefWidth="100.0" text="Buscar" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="31.0" />
+                        <ChoiceBox fx:id="ordenacaoFilme" layoutX="151.0" layoutY="49.0" prefHeight="26.0" prefWidth="299.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="120.0" />
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -55,13 +43,7 @@
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <Label layoutX="27.0" layoutY="34.0" text="Filtrar por genero: " AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="19.0" />
-                        <RadioButton fx:id="ordenaTituloMusica" layoutX="118.0" layoutY="53.0" mnemonicParsing="false" onAction="#ordenar" selected="true" text="Titulo" AnchorPane.leftAnchor="118.0" AnchorPane.topAnchor="53.0">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="ordenacaoMusica" />
-                           </toggleGroup>
-                        </RadioButton>
                         <Label layoutX="14.0" layoutY="54.0" text="Ordenar por:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="54.0" />
-                        <RadioButton fx:id="ordenaData" layoutX="200.0" layoutY="53.0" mnemonicParsing="false" onAction="#ordenar" text="Data" toggleGroup="$ordenacaoMusica" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="53.0" />
                         <ListView fx:id="listaMusicas" layoutX="200.0" layoutY="113.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0" />
                         <ChoiceBox fx:id="selectFiltroMusica" layoutX="166.0" layoutY="14.0" prefWidth="150.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="14.0" />
                         <Button mnemonicParsing="false" onAction="#btnFiltroMusica" prefWidth="100.0" text="Filtrar" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="14.0" />
