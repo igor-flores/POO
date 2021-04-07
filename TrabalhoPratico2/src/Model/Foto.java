@@ -5,28 +5,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class Foto {
-    private static final java.sql.Connection con = Connect.getCon();
-
-
+public class Foto extends Connect {
     public static ArrayList<String> readOne(String id) throws SQLException {
-            ArrayList<String> array = new ArrayList<>();
-            ResultSet result = read (
-                "`id_midia`, `titulo`, `descricao`, `caminho_midia`, `data`, `fotografo`, `local`, `pessoas`",
-                "id_midia = " + id,
-                "1"
-            );
-            result.next();
-            int i = 1;
-            while (true){
-                try {
-                    array.add(result.getString(i));
-                } catch (Exception e){
-                    return array;
-                }
-                i++;
-            }
-
+        ArrayList<String> array = new ArrayList<>();
+        ResultSet result = read (
+            "`id_midia`, `titulo`, `descricao`, `caminho_midia`, `data`, `fotografo`, `local`, `pessoas`",
+            "id_midia = " + id,
+            "1"
+        );
+        result.next();
+        int i = 1;
+        while (true){
+            try { array.add(result.getString(i)); }
+            catch (Exception e){ return array; }
+            i++;
+        }
     }
 
     public static ArrayList<String> readAll(String orderBy) throws SQLException {
@@ -43,7 +36,6 @@ public class Foto {
     }
     static ResultSet read(String campos, String where, String orderBy) throws SQLException {
         String sql = "SELECT " + campos + " FROM  `midia` INNER JOIN `foto` ON midia.id_midia = foto.midia_id_midia WHERE " + where + " ORDER BY " + orderBy;
-        assert con != null;
         PreparedStatement prepare = con.prepareStatement(sql);
         return prepare.executeQuery();
     }
@@ -52,12 +44,10 @@ public class Foto {
         String sql1 = "DELETE FROM `foto` WHERE `midia_id_midia` = " + id + "; ";
         String sql2 = "DELETE FROM `midia` WHERE `id_midia` = " + id + "; ";
         try {
-            assert con != null;
-            con.prepareStatement(sql1).execute();
-            con.prepareStatement(sql2).execute();
+            query(sql1);
+            query(sql2);
             return true;
-        } catch (SQLException throwables) {
-            System.out.println(throwables.getMessage());
+        } catch (SQLException | ClassNotFoundException throwables) {
             return false;
         }
     }

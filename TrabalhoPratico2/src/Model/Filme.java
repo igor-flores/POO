@@ -5,9 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class Filme implements CRUD{
-    private static final java.sql.Connection con = Connect.getCon();
-
+public class Filme extends Connect implements CRUD{
 
     public static ArrayList<String> readOne(String id) throws SQLException {
         ArrayList<String> array = new ArrayList<>();
@@ -55,12 +53,11 @@ public class Filme implements CRUD{
         String sql2 = "DELETE FROM `midia_reproducao` WHERE `midia_id_midia` = " + id + "; ";
         String sql3 = "DELETE FROM `midia` WHERE `id_midia` = " + id + "; ";
         try {
-            assert con != null;
-            con.prepareStatement(sql1).execute();
-            con.prepareStatement(sql2).execute();
-            con.prepareStatement(sql3).execute();
+            query(sql1);
+            query(sql2);
+            query(sql3);
             return true;
-        } catch (SQLException throwables) {
+        } catch (SQLException | ClassNotFoundException throwables) {
             System.out.println(throwables.getMessage());
             return false;
         }

@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FotoController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="424.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FotoController">
    <top>
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
@@ -14,9 +19,34 @@
       </ToolBar>
    </top>
    <center>
-      <AnchorPane BorderPane.alignment="TOP_LEFT">
+      <AnchorPane prefHeight="393.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="75.0" layoutY="57.0" mnemonicParsing="false" onAction="#getFilme" text="Importar Filme" />
+            <Button layoutX="14.0" layoutY="59.0" mnemonicParsing="false" onAction="#getFile" text="Importar Filme" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="59.0" />
+            <Label fx:id="midiaField" layoutX="130.0" layoutY="65.0" text="Selecionar foto" textFill="#757575" AnchorPane.leftAnchor="130.0" AnchorPane.topAnchor="65.0">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="14.0" text="Adicionar foto" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="midiaLabel" layoutX="14.0" layoutY="43.0" text="Midia" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="43.0" />
+            <Label fx:id="tituloLabel" layoutX="13.0" layoutY="88.0" text="Titulo" AnchorPane.leftAnchor="13.0" AnchorPane.topAnchor="88.0" />
+            <TextField fx:id="tituloField" layoutX="13.0" layoutY="104.0" prefHeight="26.0" prefWidth="364.0" promptText="Título da foto" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="201.0" />
+            <DatePicker fx:id="dataField" layoutX="408.0" layoutY="104.0" prefHeight="26.0" prefWidth="178.0" promptText="Data da foto" AnchorPane.rightAnchor="14.0" />
+            <Label fx:id="dataLabel" layoutX="408.0" layoutY="88.0" text="Data" AnchorPane.rightAnchor="160.0" />
+            <Label fx:id="descricaoLabel" layoutX="16.0" layoutY="138.0" text="Descriçao" AnchorPane.leftAnchor="16.0" />
+            <TextArea fx:id="descricaoField" layoutX="14.0" layoutY="155.0" prefHeight="50.0" prefWidth="572.0" promptText="Descrição da foto" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+            <TextField fx:id="localField" layoutX="14.0" layoutY="225.0" promptText="Local desta foto" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+            <TextField fx:id="fotografoField" layoutX="14.0" layoutY="271.0" promptText="Quem fotografou" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+            <TextField fx:id="pessoasField" layoutX="14.0" layoutY="318.0" promptText="Pessoa(s) presente(s) nesta foto" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+            <Label fx:id="localLabel" layoutX="15.0" layoutY="209.0" text="Local" AnchorPane.leftAnchor="15.0" />
+            <Label fx:id="fotografoLabel" layoutX="13.0" layoutY="254.0" text="Fotografo" />
+            <Label fx:id="pessoasLabel" layoutX="14.0" layoutY="302.0" text="Pessoas" AnchorPane.leftAnchor="14.0" />
+            <Button layoutX="486.0" layoutY="351.0" mnemonicParsing="false" onAction="#create" prefWidth="100.0" text="Adiconar" AnchorPane.rightAnchor="14.0" />
+            <Label fx:id="alertaBtn" layoutX="449.0" layoutY="356.0" textAlignment="RIGHT" textFill="RED" AnchorPane.rightAnchor="115.0" />
          </children>
       </AnchorPane>
    </center>
