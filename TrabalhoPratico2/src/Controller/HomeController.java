@@ -47,12 +47,10 @@ public class HomeController {
         try {
             if(tabFotos.isSelected()){
                 String[] split = listaFotos.getSelectionModel().getSelectedItem().split("-");
-                ArrayList<String> dados = Foto.readOne(split[0]);
-
-                Main.changeScreen("fotoVisualizar", dados);
+                Main.changeScreen("fotoRead", Foto.readOne(split[0]));
             } else if(tabFilmes.isSelected()){
                 String[] split = listaFilmes.getSelectionModel().getSelectedItem().split("-");
-                Main.changeScreen("filmeVisualizar", Filme.readOne(split[0]));
+                Main.changeScreen("filmeRead", Filme.readOne(split[0]));
             }
         } catch (SQLException e){
             exception(e.getMessage());
@@ -62,8 +60,24 @@ public class HomeController {
     }
     @FXML void adicionar() {
         if (tabFotos.isSelected()) Main.changeScreen("fotoCreate");
+        else if (tabFilmes.isSelected()) Main.changeScreen("filmeCreate");
     }
-    @FXML void editar() { }
+    @FXML void editar() {
+        try {
+            if(tabFotos.isSelected()){
+                String[] split = listaFotos.getSelectionModel().getSelectedItem().split("-");
+                ArrayList<String> dados = Foto.readOne(split[0]);
+
+                Main.changeScreen("fotoUpdate", dados);
+            } else if(tabFilmes.isSelected()){
+                String[] split = listaFilmes.getSelectionModel().getSelectedItem().split("-");
+                Main.changeScreen("filmeRead", Filme.readOne(split[0]));
+            }
+        } catch (Exception e){
+            exception(e.getMessage());
+        }//            exception("Você deve selecionar o campo que deseja editar");
+
+    }
     @FXML void excluir() {
         try {
             if (tabFotos.isSelected()){

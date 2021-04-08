@@ -12,7 +12,7 @@ import static javafx.fxml.FXMLLoader.*;
 
 public class Main extends Application {
     private static Stage stage;
-    private static Scene homeScene, fotoViewScene, fotoCreateScene, filmeViewScene;
+    private static Scene homeScene, fotoCreateScene, fotoReadScene, fotoUpdateScene, filmeCreateScene, filmeReadScene;
 
     private static final ArrayList<OnChangeScreen> listeners = new ArrayList<>();
 
@@ -32,9 +32,11 @@ public class Main extends Application {
         primaryStage.setHeight(bounds.getHeight());
 
         homeScene = new Scene(load(Objects.requireNonNull(getClass().getResource("../View/Home.fxml"))));
-        fotoViewScene = new Scene(load(Objects.requireNonNull(getClass().getResource("../View/FotoVisualizar.fxml"))));
         fotoCreateScene = new Scene(load(Objects.requireNonNull(getClass().getResource("../View/FotoCreate.fxml"))));
-        filmeViewScene = new Scene(load(Objects.requireNonNull(getClass().getResource("../View/FilmeVisualizar.fxml"))));
+        fotoReadScene = new Scene(load(Objects.requireNonNull(getClass().getResource("../View/FotoVisualizar.fxml"))));
+        fotoUpdateScene = new Scene(load(Objects.requireNonNull(getClass().getResource("../View/FotoUpdate.fxml"))));
+        filmeReadScene = new Scene(load(Objects.requireNonNull(getClass().getResource("../View/FilmeVisualizar.fxml"))));
+        filmeCreateScene = new Scene(load(Objects.requireNonNull(getClass().getResource("../View/FilmeCreate.fxml"))));
 
         primaryStage.setScene(homeScene);
         primaryStage.show();
@@ -51,9 +53,11 @@ public class Main extends Application {
      */
     public static void changeScreen(String screen, ArrayList<String> userData){
         switch (screen){
-            case "fotoVisualizar": stage.setScene(fotoViewScene); break;
             case "fotoCreate": stage.setScene(fotoCreateScene); break;
-            case "filmeVisualizar": stage.setScene(filmeViewScene); break;
+            case "fotoRead": stage.setScene(fotoReadScene); break;
+            case "fotoUpdate": stage.setScene(fotoUpdateScene); break;
+            case "filmeCreate": stage.setScene(filmeCreateScene); break;
+            case "filmeRead": stage.setScene(filmeReadScene); break;
             default: stage.setScene(homeScene);
         }
         notifyAllListeners(screen, userData);
