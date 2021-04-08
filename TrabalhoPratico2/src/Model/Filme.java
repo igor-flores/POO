@@ -49,13 +49,9 @@ public class Filme extends Connect implements CRUD{
     }
 
     public static boolean delete(String id){
-        String sql1 = "DELETE FROM `filme` WHERE `midia_reproducao_id_midia` = " + id + "; ";
-        String sql2 = "DELETE FROM `midia_reproducao` WHERE `midia_id_midia` = " + id + "; ";
-        String sql3 = "DELETE FROM `midia` WHERE `id_midia` = " + id + "; ";
+        String sql = "DELETE FROM `midia` WHERE `id_midia` = " + id + "; ";
         try {
-            query(sql1);
-            query(sql2);
-            query(sql3);
+            query(sql);
             return true;
         } catch (SQLException | ClassNotFoundException throwables) {
             System.out.println(throwables.getMessage());
