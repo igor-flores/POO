@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.media.MediaView?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FilmeController">
+   <top>
+      <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+            <Button mnemonicParsing="false" onAction="#voltar" prefWidth="100.0" text="Voltar" />
+        </items>
+      </ToolBar>
+   </top>
+   <center>
+      <AnchorPane BorderPane.alignment="TOP_LEFT">
+         <children>
+            <Label fx:id="titulo" layoutX="14.0" layoutY="14.0" text="#0 - Titulo" AnchorPane.topAnchor="14.0">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="descricao" layoutX="14.0" layoutY="47.0" prefHeight="35.0" prefWidth="580.0" text="Descriçao: " AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="45.0" />
+            <Label fx:id="genero" layoutX="301.0" layoutY="140.0" text="Genero: " AnchorPane.leftAnchor="300.0" />
+            <Label fx:id="duracao" layoutX="10.0" layoutY="113.0" text="Duracao" AnchorPane.leftAnchor="10.0" />
+            <Label fx:id="diretor" layoutX="301.0" layoutY="85.0" text="Diretor" AnchorPane.leftAnchor="300.0" />
+            <Label fx:id="ano" layoutX="10.0" layoutY="140.0" text="Ano: " />
+            <Label fx:id="atores" layoutX="10.0" layoutY="85.0" text="Atores" />
+            <Label fx:id="idioma" layoutX="301.0" layoutY="113.0" text="Idioma" AnchorPane.leftAnchor="300.0" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

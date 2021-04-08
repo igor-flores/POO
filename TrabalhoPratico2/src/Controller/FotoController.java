@@ -27,30 +27,35 @@ public class FotoController extends HomeController {
 
     @FXML protected void initialize(){
         Main.setListener((newScreen, userData) -> {
-            if(newScreen.equals("fotoVisualizar")){
-                if(userData != null){
-                    view(userData);
-                }
-            } else if (newScreen.equals("fotoCreate")){
-                clearFields();
+            switch (newScreen){
+                case "fotoCreate": clearFields(); break;
+                case "fotoRead": read(userData); break;
+                case "fotoUpdate": InitializeUpdate(userData); break;
             }
         });
     }
 
-    void clearFields() {
-        /* INICIA FIELDS E LABELS */
-        if (midiaLabel == null) {
-            midiaLabel = new Label(); tituloLabel = new Label(); dataLabel = new Label(); descricaoLabel = new Label(); localLabel = new Label(); fotografoLabel = new Label(); pessoasLabel = new Label(); alertaBtn = new Label();
-            midiaField = new Label(); tituloField = new TextField(); dataField = new DatePicker(); descricaoField = new TextArea(); localField = new TextField(); fotografoField = new TextField(); pessoasField = new TextField();
+    @FXML void create() {
+        try {
+            if (noErrorAll()) {
+                String nomeArquivo = new Date().getTime() + ".jpg";
+                Connect.query("INSERT INTO `midia`(`titulo`, `descricao`, `caminho_midia`, `data`) VALUES ('" + tituloField.getText() + "', '" + descricaoField.getText() + "', '" + nomeArquivo + "', '" + dataField.getValue() + "'); ");
+                int id = Connect.selectId("SELECT MAX(id_midia) FROM midia");
+                Connect.query("INSERT INTO `foto`(fotografo, local, pessoas, midia_id_midia) VALUES ('" + fotografoField.getText() + "', '" + localField.getText() + "', '" + pessoasField.getText() + "', '" + id + "'); ");
+
+                if(selectedFile != null){
+                    File newFile = new File("src/Assets/fotos/" + nomeArquivo);
+                    FileUtils.copyFile(selectedFile, newFile);
+                }
+                Main.changeScreen("Home");
+                exception("Foto cadastrada com sucesso!");
+            }
+        } catch (IOException | ClassNotFoundException | SQLException e) {
+            exception("Poxa, houve algum problema... Revise os campos e tente novamente!");
         }
-        /* SETA / LIMPA TEXTOS */
-        selectedFile = null;
-        midiaLabel.setText("Midia"); tituloLabel.setText("Titulo"); dataLabel.setText("Data"); descricaoLabel.setText("Descrição: "); localLabel.setText("Local"); fotografoLabel.setText("Fotografo"); pessoasLabel.setText("Pessoas"); alertaBtn.setText("");
-        midiaLabel.setStyle("-fx-text-fill: black"); tituloLabel.setStyle("-fx-text-fill: black"); dataLabel.setStyle("-fx-text-fill: black"); descricaoLabel.setStyle("-fx-text-fill: black"); localLabel.setStyle("-fx-text-fill: black"); fotografoLabel.setStyle("-fx-text-fill: black"); pessoasLabel.setStyle("-fx-text-fill: black");
-        midiaField.setText("Selecionar foto"); tituloField.setText(""); dataField.setValue(null); descricaoField.setText(""); localField.setText(""); fotografoField.setText(""); pessoasField.setText("");
     }
 
-    void view(ArrayList<String> dados){
+    void read(ArrayList<String> dados){
         if(titulo == null){
             titulo = new Label();
             descricao = new Label();
@@ -70,57 +75,46 @@ public class FotoController extends HomeController {
         img.setImage(new Image("Assets/fotos/" + dados.get(3)));
     }
 
+    void InitializeUpdate(ArrayList<String> dados){
+        clearFields();
+        tituloField.setText(dados.get(1));
+        descricaoField.setText(dados.get(2));
+        dataField.setValue(LocalDate.parse(dados.get(4)));
+        fotografoField.setText(dados.get(5));
+        localField.setText(dados.get(6));
+        pessoasField.setText(dados.get(7));
+    }
 
-    @FXML
-    void create() {
+    @FXML void update(){
         try{
-            boolean error = false;
-            if (fotografoField.getText().equals("")){ fotografoLabel.setStyle("-fx-text-fill: red"); error = true; } else fotografoLabel.setStyle("-fx-text-fill: black");
-            if (selectedFile == null) { midiaLabel.setStyle("-fx-text-fill: red"); error = true;} else midiaLabel.setStyle("-fx-text-fill: black");
-            if (tituloField.getText().equals("")){ tituloLabel.setStyle("-fx-text-fill: red"); error = true; } else tituloLabel.setStyle("-fx-text-fill: black");
-
-            try {
-                LocalDate.parse(
-                    dataField.getValue().toString(),
-                    DateTimeFormatter.ofPattern(
-                        "uuuu-M-d"
-                    ).withResolverStyle(
-                            ResolverStyle.STRICT
-                    )
-                );
-                dataLabel.setStyle("-fx-text-fill: black");
-            } catch (Exception e){
-                dataLabel.setStyle("-fx-text-fill: red"); error = true;
-            }
-
-            if (descricaoField.getText().equals("")) { descricaoLabel.setStyle("-fx-text-fill: red"); error = true; } else descricaoLabel.setStyle("-fx-text-fill: black");
-            if (localField.getText().equals("")){ localLabel.setStyle("-fx-text-fill: red"); error = true; } else localLabel.setStyle("-fx-text-fill: black");
-
-            if (pessoasField.getText().equals("")){ pessoasLabel.setStyle("-fx-text-fill: red"); error = true; } else pessoasLabel.setStyle("-fx-text-fill: black");
-            if (error) {
-                alertaBtn.setText("Preencha todos os campos corretamente.");
-            } else {
-                alertaBtn.setText("");
-
-                String nomeArquivo = new Date().getTime() + ".jpg";
-                Connect.query("INSERT INTO `midia`(`titulo`, `descricao`, `caminho_midia`, `data`) VALUES ('" + tituloField.getText() + "', '" + descricaoField.getText() + "', '" + nomeArquivo + "', '" + dataField.getValue() + "'); ");
-                int id = Connect.selectId("SELECT MAX(id_midia) FROM midia");
-                Connect.query("INSERT INTO `foto`(fotografo, local, pessoas, midia_id_midia) VALUES ('" + fotografoField.getText() + "', '" + localField.getText() + "', '" + pessoasField.getText() + "', '" + id + "'); ");
+            if (noError()) {
+                String nomeArquivo;
 
                 if(selectedFile != null){
+                    nomeArquivo = new Date().getTime() + ".jpg";
                     File newFile = new File("src/Assets/fotos/" + nomeArquivo);
                     FileUtils.copyFile(selectedFile, newFile);
                 }
-                Main.changeScreen("Home");
+
+//                String nomeArquivo = new Date().getTime() + ".jpg";
+//                Connect.query("INSERT INTO `midia`(`titulo`, `descricao`, `caminho_midia`, `data`) VALUES ('" + tituloField.getText() + "', '" + descricaoField.getText() + "', '" + nomeArquivo + "', '" + dataField.getValue() + "'); ");
+//                int id = Connect.selectId("SELECT MAX(id_midia) FROM midia");
+//                Connect.query("INSERT INTO `foto`(fotografo, local, pessoas, midia_id_midia) VALUES ('" + fotografoField.getText() + "', '" + localField.getText() + "', '" + pessoasField.getText() + "', '" + id + "'); ");
+//
+//                if(selectedFile != null){
+//                    File newFile = new File("src/Assets/fotos/" + nomeArquivo);
+//                    FileUtils.copyFile(selectedFile, newFile);
+//                }
+//                Main.changeScreen("Home");
                 exception("Foto cadastrada com sucesso!");
             }
-        } catch (IOException | ClassNotFoundException | SQLException e) {
+//        } catch (IOException | ClassNotFoundException | SQLException e) {
+        } catch (IOException e) {
             exception(e.getMessage());
         }
     }
 
-    @FXML
-    void getFile() {
+    @FXML void getFile() {
         FileChooser inputFile = new FileChooser();
         inputFile.getExtensionFilters().add(
             new FileChooser.ExtensionFilter("Imagens", "*.jpg", "*.png")
@@ -132,4 +126,54 @@ public class FotoController extends HomeController {
         }
     }
 
+
+    void clearFields() {
+        /* INICIALIZA FIELDS E LABELS */
+        if (midiaLabel == null) {
+            midiaLabel = new Label(); tituloLabel = new Label(); dataLabel = new Label(); descricaoLabel = new Label(); localLabel = new Label(); fotografoLabel = new Label(); pessoasLabel = new Label(); alertaBtn = new Label();
+            midiaField = new Label(); tituloField = new TextField(); dataField = new DatePicker(); descricaoField = new TextArea(); localField = new TextField(); fotografoField = new TextField(); pessoasField = new TextField();
+        }
+
+        /* SETA / LIMPA TEXTOS */
+        selectedFile = null;
+        midiaLabel.setText("Midia"); tituloLabel.setText("Titulo"); dataLabel.setText("Data"); descricaoLabel.setText("Descrição: "); localLabel.setText("Local"); fotografoLabel.setText("Fotografo"); pessoasLabel.setText("Pessoas"); alertaBtn.setText("");
+        midiaLabel.setStyle("-fx-text-fill: black"); tituloLabel.setStyle("-fx-text-fill: black"); dataLabel.setStyle("-fx-text-fill: black"); descricaoLabel.setStyle("-fx-text-fill: black"); localLabel.setStyle("-fx-text-fill: black"); fotografoLabel.setStyle("-fx-text-fill: black"); pessoasLabel.setStyle("-fx-text-fill: black");
+        midiaField.setText("Selecionar foto"); tituloField.setText(""); dataField.setValue(null); descricaoField.setText(""); localField.setText(""); fotografoField.setText(""); pessoasField.setText("");
+    }
+
+    boolean noError(){
+        boolean noError = true;
+        if (fotografoField.getText().equals("")){ fotografoLabel.setStyle("-fx-text-fill: red"); noError = false; } else fotografoLabel.setStyle("-fx-text-fill: black");
+        if (tituloField.getText().equals("")){ tituloLabel.setStyle("-fx-text-fill: red"); noError = false; } else tituloLabel.setStyle("-fx-text-fill: black");
+        try {
+            LocalDate.parse(
+                dataField.getValue().toString(),
+                DateTimeFormatter.ofPattern(
+                    "uuuu-M-d"
+                ).withResolverStyle(
+                    ResolverStyle.STRICT
+                )
+            );
+            dataLabel.setStyle("-fx-text-fill: black");
+        } catch (Exception e){
+            dataLabel.setStyle("-fx-text-fill: red"); noError = false;
+        }
+        if (descricaoField.getText().equals("")) {descricaoLabel.setStyle("-fx-text-fill: red"); noError = false;} else {descricaoLabel.setStyle("-fx-text-fill: black");}
+        if (localField.getText().equals("")){ localLabel.setStyle("-fx-text-fill: red"); noError = false; } else localLabel.setStyle("-fx-text-fill: black");
+        if (pessoasField.getText().equals("")){ pessoasLabel.setStyle("-fx-text-fill: red"); noError = false; } else pessoasLabel.setStyle("-fx-text-fill: black");
+
+        if (!noError) alertaBtn.setText("Preencha todos os campos corretamente.");
+        else alertaBtn.setText("");
+
+        return noError;
+    }
+    boolean noErrorAll(){
+        boolean noError = noError();
+        if (selectedFile == null) { midiaLabel.setStyle("-fx-text-fill: red"); noError = false;} else midiaLabel.setStyle("-fx-text-fill: black");
+
+        if (!noError) alertaBtn.setText("Preencha todos os campos corretamente.");
+        else alertaBtn.setText("");
+
+        return noError;
+    }
 }

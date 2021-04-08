@@ -12,8 +12,8 @@ import Model.*;
 public class HomeController {
     @FXML private Tab tabFotos, tabFilmes, tabMusicas;
     @FXML private ListView<String> listaFotos, listaFilmes, listaMusicas;
-    @FXML private ChoiceBox<String> selectFiltroFilme, selectFiltroMusica;
-    @FXML private ChoiceBox<String> ordenacaoFoto, ordenacaoFilme;
+    @FXML private ChoiceBox<String> filtroFilme, filtroMusica;
+    @FXML private ChoiceBox<String> ordenacaoFoto, ordenacaoFilme, ordenacaoMusica;
 
     @FXML protected void initialize(){
         iniciaListas();
@@ -32,8 +32,9 @@ public class HomeController {
         try {
             listaFotos.getItems().addAll(Foto.readAll("id_midia"));
             listaFilmes.getItems().addAll(Filme.readAll("id_midia"));
-        } catch (SQLException throwables) {
-            exception("Erro: " + throwables.getMessage());
+            listaMusicas.getItems().addAll(Musica.readAll("id_midia"));
+        } catch (SQLException e) {
+            exception("Erro: " + e.getMessage());
         }
     }
 
@@ -41,6 +42,8 @@ public class HomeController {
         String[] ordenacoes = {"Código 1-9", "Código 9-1", "Titulo A-Z", "Titulo Z-A", "Data mais recente", "Data mais antiga"};
         ordenacaoFoto.getItems().addAll(ordenacoes);
         ordenacaoFilme.getItems().addAll(ordenacoes);
+        ordenacaoMusica.getItems().addAll(ordenacoes);
+
     }
 
     @FXML void visualizar(){
@@ -51,16 +54,21 @@ public class HomeController {
             } else if(tabFilmes.isSelected()){
                 String[] split = listaFilmes.getSelectionModel().getSelectedItem().split("-");
                 Main.changeScreen("filmeRead", Filme.readOne(split[0]));
+            } else if(tabMusicas.isSelected()){
+                String[] split = listaMusicas.getSelectionModel().getSelectedItem().split("-");
+                Main.changeScreen("musicaRead", Musica.readOne(split[0]));
             }
         } catch (SQLException e){
             exception(e.getMessage());
         } catch (Exception e){
-            exception("Você deve selecionar o campo que deseja visualizar");
+            exception(e.getMessage());
+//            exception("Você deve selecionar o campo que deseja visualizar");
         }
     }
     @FXML void adicionar() {
         if (tabFotos.isSelected()) Main.changeScreen("fotoCreate");
         else if (tabFilmes.isSelected()) Main.changeScreen("filmeCreate");
+        else if (tabMusicas.isSelected()) Main.changeScreen("musicaCreate");
     }
     @FXML void editar() {
         try {
@@ -82,21 +90,19 @@ public class HomeController {
         try {
             if (tabFotos.isSelected()){
                 String[] split = listaFotos.getSelectionModel().getSelectedItem().split("-");
-                if(Foto.delete(split[0])){
-                    iniciaListas();
-                    exception("ok");
-                }else {
-                    exception("erro");
-                }
+                if(Foto.delete(split[0])) exception("ok");
+                else exception("erro");
             } else if(tabFilmes.isSelected()){
                 String[] split = listaFilmes.getSelectionModel().getSelectedItem().split("-");
-                if(Filme.delete(split[0])){
-                    iniciaListas();
-                    exception("ok");
-                }else {
-                    exception("erro");
-                }
+                if(Filme.delete(split[0])) exception("ok");
+                else exception("erro");
+
+            } else if(tabMusicas.isSelected()){
+                String[] split = listaMusicas.getSelectionModel().getSelectedItem().split("-");
+                if(Musica.delete(split[0])) exception("ok");
+                else exception("erro");
             }
+            iniciaListas();
         } catch (Exception e){
             exception(e.getMessage());
         }
@@ -116,7 +122,15 @@ public class HomeController {
                     default: listaFotos.getItems().addAll(Foto.readAll("id_midia ASC")); break;
                 }
             } else if(tabFilmes.isSelected()){
-                System.out.println("roi");
+                listaFilmes.getItems().clear();
+                switch (ordenacaoFoto.getValue()) {
+                    case "Titulo A-Z": listaFilmes.getItems().addAll(Filme.readAll("titulo ASC")); break;
+                    case "Titulo Z-A": listaFilmes.getItems().addAll(Filme.readAll("titulo DESC")); break;
+                    case "Data mais recente": listaFilmes.getItems().addAll(Filme.readAll("data DESC")); break;
+                    case "Data mais antiga": listaFilmes.getItems().addAll(Filme.readAll("data ASC")); break;
+                    case "Código 9-1": listaFilmes.getItems().addAll(Filme.readAll("id_midia DESC")); break;
+                    default: listaFilmes.getItems().addAll(Filme.readAll("id_midia ASC")); break;
+                }
             }
         } catch (SQLException throwables) {
             exception(throwables.getMessage());
@@ -134,5 +148,5 @@ public class HomeController {
     @FXML void limparFiltroFilme() {}
     @FXML void btnFiltroMusica() { }
 
-    @FXML void voltar() { Main.changeScreen("Home"); }
+    @FXML void voltar() { Main.changeScreen("Home"); iniciaListas(); }
 }

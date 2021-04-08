@@ -6,13 +6,17 @@ import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import java.nio.file.Paths;
 import java.util.*;
 
 import static javafx.fxml.FXMLLoader.*;
 
 public class Main extends Application {
     private static Stage stage;
-    private static Scene homeScene, fotoCreateScene, fotoReadScene, fotoUpdateScene, filmeCreateScene, filmeReadScene;
+    private static Scene homeScene;
+    private static Scene fotoCreateScene, fotoReadScene, fotoUpdateScene;
+    private static Scene filmeCreateScene, filmeReadScene;
+    private static Scene musicaCreateScene, musicaReadScene;
 
     private static final ArrayList<OnChangeScreen> listeners = new ArrayList<>();
 
@@ -32,11 +36,16 @@ public class Main extends Application {
         primaryStage.setHeight(bounds.getHeight());
 
         homeScene = new Scene(load(Objects.requireNonNull(getClass().getResource("../View/Home.fxml"))));
+
         fotoCreateScene = new Scene(load(Objects.requireNonNull(getClass().getResource("../View/FotoCreate.fxml"))));
         fotoReadScene = new Scene(load(Objects.requireNonNull(getClass().getResource("../View/FotoVisualizar.fxml"))));
         fotoUpdateScene = new Scene(load(Objects.requireNonNull(getClass().getResource("../View/FotoUpdate.fxml"))));
+
         filmeReadScene = new Scene(load(Objects.requireNonNull(getClass().getResource("../View/FilmeVisualizar.fxml"))));
         filmeCreateScene = new Scene(load(Objects.requireNonNull(getClass().getResource("../View/FilmeCreate.fxml"))));
+
+        musicaCreateScene = new Scene(load(Objects.requireNonNull(getClass().getResource("../View/MusicaCreate.fxml"))));
+        musicaReadScene = new Scene(load(Objects.requireNonNull(getClass().getResource("../View/MusicaRead.fxml"))));
 
         primaryStage.setScene(homeScene);
         primaryStage.show();
@@ -56,8 +65,12 @@ public class Main extends Application {
             case "fotoCreate": stage.setScene(fotoCreateScene); break;
             case "fotoRead": stage.setScene(fotoReadScene); break;
             case "fotoUpdate": stage.setScene(fotoUpdateScene); break;
+
             case "filmeCreate": stage.setScene(filmeCreateScene); break;
             case "filmeRead": stage.setScene(filmeReadScene); break;
+
+            case "musicaCreate": stage.setScene(musicaCreateScene); break;
+            case "musicaRead": stage.setScene(musicaReadScene); break;
             default: stage.setScene(homeScene);
         }
         notifyAllListeners(screen, userData);
