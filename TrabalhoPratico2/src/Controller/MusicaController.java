@@ -5,8 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
 import org.apache.commons.io.FileUtils;
@@ -75,10 +73,10 @@ public class MusicaController extends HomeController{
         try {
             if (noErrorAll()) {
                 String nomeArquivo = new Date().getTime() + ".mp4";
-                Connect.query("INSERT INTO `midia`(`titulo`, `descricao`, `caminho_midia`, `data`) VALUES ('" + tituloField.getText() + "', '" + descricaoField.getText() + "', '" + nomeArquivo + "', '" + anoField.getText() + "-01-01'); ");
+                Connect.execute("INSERT INTO `midia`(`titulo`, `descricao`, `caminho_midia`, `data`) VALUES ('" + tituloField.getText() + "', '" + descricaoField.getText() + "', '" + nomeArquivo + "', '" + anoField.getText() + "-01-01'); ");
                 int id = Connect.selectId("SELECT MAX(id_midia) FROM midia");
-                Connect.query("INSERT INTO `midia_reproducao`(genero, idioma, midia_id_midia) VALUES ('" + generoField.getText() + "', '" + idiomaField.getText() + "', '" + id + "'); ");
-                Connect.query("INSERT INTO `musica`(interpretes, midia_reproducao_id_midia) VALUES ('" + interpretesField.getText() + "', '" + id + "'); ");
+                Connect.execute("INSERT INTO `midia_reproducao`(genero, idioma, midia_id_midia) VALUES ('" + generoField.getText() + "', '" + idiomaField.getText() + "', '" + id + "'); ");
+                Connect.execute("INSERT INTO `musica`(interpretes, midia_reproducao_id_midia) VALUES ('" + interpretesField.getText() + "', '" + id + "'); ");
 
                 if(selectedFile != null){
                     File newFile = new File("src/Assets/musicas/" + nomeArquivo);

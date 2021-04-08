@@ -23,7 +23,7 @@ public class Connect {
         return result.getInt(1);
     }
 
-    public static void query(String sql) throws SQLException, ClassNotFoundException {
+    public static void execute(String sql) throws SQLException, ClassNotFoundException {
         con.prepareStatement(sql).execute();
     }
 }

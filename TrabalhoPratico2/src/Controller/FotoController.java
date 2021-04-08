@@ -39,9 +39,9 @@ public class FotoController extends HomeController {
         try {
             if (noErrorAll()) {
                 String nomeArquivo = new Date().getTime() + ".jpg";
-                Connect.query("INSERT INTO `midia`(`titulo`, `descricao`, `caminho_midia`, `data`) VALUES ('" + tituloField.getText() + "', '" + descricaoField.getText() + "', '" + nomeArquivo + "', '" + dataField.getValue() + "'); ");
+                Connect.execute("INSERT INTO `midia`(`titulo`, `descricao`, `caminho_midia`, `data`) VALUES ('" + tituloField.getText() + "', '" + descricaoField.getText() + "', '" + nomeArquivo + "', '" + dataField.getValue() + "'); ");
                 int id = Connect.selectId("SELECT MAX(id_midia) FROM midia");
-                Connect.query("INSERT INTO `foto`(fotografo, local, pessoas, midia_id_midia) VALUES ('" + fotografoField.getText() + "', '" + localField.getText() + "', '" + pessoasField.getText() + "', '" + id + "'); ");
+                Connect.execute("INSERT INTO `foto`(fotografo, local, pessoas, midia_id_midia) VALUES ('" + fotografoField.getText() + "', '" + localField.getText() + "', '" + pessoasField.getText() + "', '" + id + "'); ");
 
                 if(selectedFile != null){
                     File newFile = new File("src/Assets/fotos/" + nomeArquivo);
@@ -97,9 +97,9 @@ public class FotoController extends HomeController {
                 }
 
 //                String nomeArquivo = new Date().getTime() + ".jpg";
-//                Connect.query("INSERT INTO `midia`(`titulo`, `descricao`, `caminho_midia`, `data`) VALUES ('" + tituloField.getText() + "', '" + descricaoField.getText() + "', '" + nomeArquivo + "', '" + dataField.getValue() + "'); ");
+//                Connect.execute("INSERT INTO `midia`(`titulo`, `descricao`, `caminho_midia`, `data`) VALUES ('" + tituloField.getText() + "', '" + descricaoField.getText() + "', '" + nomeArquivo + "', '" + dataField.getValue() + "'); ");
 //                int id = Connect.selectId("SELECT MAX(id_midia) FROM midia");
-//                Connect.query("INSERT INTO `foto`(fotografo, local, pessoas, midia_id_midia) VALUES ('" + fotografoField.getText() + "', '" + localField.getText() + "', '" + pessoasField.getText() + "', '" + id + "'); ");
+//                Connect.execute("INSERT INTO `foto`(fotografo, local, pessoas, midia_id_midia) VALUES ('" + fotografoField.getText() + "', '" + localField.getText() + "', '" + pessoasField.getText() + "', '" + id + "'); ");
 //
 //                if(selectedFile != null){
 //                    File newFile = new File("src/Assets/fotos/" + nomeArquivo);

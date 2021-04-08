@@ -75,10 +75,10 @@ public class FilmeController extends HomeController{
         try {
             if (noErrorAll()) {
                 String nomeArquivo = new Date().getTime() + ".mp4";
-                Connect.query("INSERT INTO `midia`(`titulo`, `descricao`, `caminho_midia`, `data`) VALUES ('" + tituloField.getText() + "', '" + descricaoField.getText() + "', '" + nomeArquivo + "', '" + anoField.getText() + "-01-01'); ");
+                Connect.execute("INSERT INTO `midia`(`titulo`, `descricao`, `caminho_midia`, `data`) VALUES ('" + tituloField.getText() + "', '" + descricaoField.getText() + "', '" + nomeArquivo + "', '" + anoField.getText() + "-01-01'); ");
                 int id = Connect.selectId("SELECT MAX(id_midia) FROM midia");
-                Connect.query("INSERT INTO `midia_reproducao`(genero, idioma, midia_id_midia) VALUES ('" + generoField.getText() + "', '" + idiomaField.getText() + "', '" + id + "'); ");
-                Connect.query("INSERT INTO `filme`(diretor, atores, midia_reproducao_id_midia) VALUES ('" + diretorField.getText() + "', '" + atoresField.getText() + "', '" + id + "'); ");
+                Connect.execute("INSERT INTO `midia_reproducao`(genero, idioma, midia_id_midia) VALUES ('" + generoField.getText() + "', '" + idiomaField.getText() + "', '" + id + "'); ");
+                Connect.execute("INSERT INTO `filme`(diretor, atores, midia_reproducao_id_midia) VALUES ('" + diretorField.getText() + "', '" + atoresField.getText() + "', '" + id + "'); ");
 
                 if(selectedFile != null){
                     File newFile = new File("src/Assets/filmes/" + nomeArquivo);

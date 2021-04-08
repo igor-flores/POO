@@ -43,7 +43,7 @@ public class Foto extends Connect {
     public static boolean delete(String id){
         String sql = "DELETE FROM `midia` WHERE `id_midia` = " + id + "; ";
         try {
-            query(sql);
+            execute(sql);
             return true;
         } catch (SQLException | ClassNotFoundException throwables) {
             return false;
