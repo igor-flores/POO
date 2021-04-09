@@ -3,7 +3,6 @@ package Controller;
 import Model.Connect;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -55,16 +54,15 @@ public class MusicaController extends UtilMidiaReproducaoController {
     }
 
     void clearFields() {
+        super.clearFields();
+
         /* INICIALIZA FIELDS E LABELS */
-        if (midiaLabel == null) {
-            midiaLabel = new Label(); tituloLabel = new Label(); anoLabel = new Label(); descricaoLabel = new Label(); interpretesLabel = new Label(); idiomaLabel = new Label(); generoLabel = new Label(); alertaBtn = new Label();
-            midiaField = new Label(); tituloField = new TextField(); anoField = new TextField(); descricaoField = new TextArea(); interpretesField = new TextField(); idiomaField = new TextField(); generoField = new TextField();
-        }
-        selectedFile = null;
+        interpretesLabel = new Label(); interpretesField = new TextField();
+
         /* SETA / LIMPA TEXTOS */
-        midiaLabel.setText("Midia"); tituloLabel.setText("Titulo"); anoLabel.setText("Ano"); descricaoLabel.setText("Descrição"); interpretesLabel.setText("Interpretes"); idiomaLabel.setText("Idioma"); generoLabel.setText("Genero"); alertaBtn.setText("");
-        midiaLabel.setStyle("-fx-text-fill: black"); tituloLabel.setStyle("-fx-text-fill: black"); anoLabel.setStyle("-fx-text-fill: black"); descricaoLabel.setStyle("-fx-text-fill: black"); interpretesLabel.setStyle("-fx-text-fill: black"); idiomaLabel.setStyle("-fx-text-fill: black"); generoLabel.setStyle("-fx-text-fill: black");
-        midiaField.setText("Selecionar música"); tituloField.setText(""); anoField.setText(""); descricaoField.setText(""); interpretesField.setText(""); idiomaField.setText(""); generoField.setText("");
+        interpretesLabel.setStyle("-fx-text-fill: black");
+        interpretesLabel.setText("Interpretes");
+        interpretesField.setText("");
     }
 
     @FXML void create() {

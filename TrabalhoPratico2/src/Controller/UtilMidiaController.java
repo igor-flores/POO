@@ -30,13 +30,11 @@ class UtilMidiaController {
         }
     }
 
-
     void clearFields() {
         /* INICIALIZA FIELDS E LABELS */
-        if (midiaLabel == null) {
-            midiaLabel = new Label(); tituloLabel = new Label(); descricaoLabel = new Label(); alertaBtn = new Label();
-            midiaField = new Label(); tituloField = new TextField();  descricaoField = new TextArea();
-        }
+        midiaLabel = new Label(); tituloLabel = new Label(); descricaoLabel = new Label(); alertaBtn = new Label();
+        midiaField = new Label(); tituloField = new TextField();  descricaoField = new TextArea();
+
         selectedFile = null;
 
         /* SETA / LIMPA TEXTOS */
@@ -69,6 +67,7 @@ class UtilMidiaController {
         alert.show();
     }
 }
+
 class UtilMidiaReproducaoController extends UtilMidiaController {
     @FXML protected Label ano, genero, idioma;
     @FXML protected Label anoLabel, idiomaLabel, generoLabel;
@@ -90,5 +89,16 @@ class UtilMidiaReproducaoController extends UtilMidiaController {
 
         return noError;
     }
+    void clearFields(){
+        super.clearFields();
 
+        /* INICIALIZA FIELDS E LABELS */
+        anoField = new TextField(); idiomaField = new TextField(); generoField = new TextField();
+        anoLabel = new Label(); idiomaLabel = new Label(); generoLabel = new Label();
+
+        /* SETA / LIMPA TEXTOS */
+        anoLabel.setStyle("-fx-text-fill: black"); idiomaLabel.setStyle("-fx-text-fill: black"); generoLabel.setStyle("-fx-text-fill: black");
+        anoLabel.setText("Ano"); idiomaLabel.setText("Idioma"); generoLabel.setText("Genero");
+        anoField.setText(""); idiomaField.setText(""); generoField.setText("");
+    }
 }

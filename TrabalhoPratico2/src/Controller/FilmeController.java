@@ -57,12 +57,15 @@ public class FilmeController extends UtilMidiaReproducaoController {
 
     void clearFields(){
         super.clearFields();
-        anoLabel = new Label(); diretorLabel = new Label(); atoresLabel = new Label(); idiomaLabel = new Label(); generoLabel = new Label();
-        anoField = new TextField(); diretorField = new TextField(); atoresField = new TextField(); idiomaField = new TextField(); generoField = new TextField();
 
-        anoLabel.setText("Ano"); diretorLabel.setText("Diretor"); atoresLabel.setText("Atores"); idiomaLabel.setText("Idioma"); generoLabel.setText("Genero");
-        anoLabel.setStyle("-fx-text-fill: black"); diretorLabel.setStyle("-fx-text-fill: black"); atoresLabel.setStyle("-fx-text-fill: black"); idiomaLabel.setStyle("-fx-text-fill: black"); generoLabel.setStyle("-fx-text-fill: black");
-        anoField.setText(""); diretorField.setText(""); atoresField.setText(""); idiomaField.setText(""); generoField.setText("");
+        /* INICIALIZA FIELDS E LABELS */
+        diretorField = new TextField(); atoresField = new TextField();
+        diretorLabel = new Label(); atoresLabel = new Label();
+
+        /* SETA / LIMPA TEXTOS */
+        diretorLabel.setStyle("-fx-text-fill: black"); atoresLabel.setStyle("-fx-text-fill: black");
+        diretorLabel.setText("Diretor"); atoresLabel.setText("Atores");
+        diretorField.setText(""); atoresField.setText("");
     }
 
     @FXML void create() {

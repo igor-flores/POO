@@ -13,11 +13,11 @@ import java.time.format.*;
 import java.util.*;
 
 public class FotoController extends UtilMidiaController {
-    /** READ */
+    /* READ */
     @FXML private ImageView img;
     @FXML private Label fotografo, local, data, pessoas;
 
-    /** CREATE */
+    /* CREATE */
     @FXML private Label dataLabel, localLabel, fotografoLabel, pessoasLabel;
     @FXML private TextField localField, fotografoField, pessoasField;
     @FXML private DatePicker dataField;
@@ -129,6 +129,9 @@ public class FotoController extends UtilMidiaController {
     boolean noError(){
         boolean noError = super.noError();
         if (fotografoField.getText().equals("")){ fotografoLabel.setStyle("-fx-text-fill: red"); noError = false; } else fotografoLabel.setStyle("-fx-text-fill: black");
+        if (localField.getText().equals("")){ localLabel.setStyle("-fx-text-fill: red"); noError = false; } else localLabel.setStyle("-fx-text-fill: black");
+        if (pessoasField.getText().equals("")){ pessoasLabel.setStyle("-fx-text-fill: red"); noError = false; } else pessoasLabel.setStyle("-fx-text-fill: black");
+
         try {
             LocalDate.parse(
                 dataField.getValue().toString(),
@@ -142,8 +145,6 @@ public class FotoController extends UtilMidiaController {
         } catch (Exception e){
             dataLabel.setStyle("-fx-text-fill: red"); noError = false;
         }
-        if (localField.getText().equals("")){ localLabel.setStyle("-fx-text-fill: red"); noError = false; } else localLabel.setStyle("-fx-text-fill: black");
-        if (pessoasField.getText().equals("")){ pessoasLabel.setStyle("-fx-text-fill: red"); noError = false; } else pessoasLabel.setStyle("-fx-text-fill: black");
 
         if (!noError) alertaBtn.setText("Preencha todos os campos corretamente.");
         else alertaBtn.setText("");
