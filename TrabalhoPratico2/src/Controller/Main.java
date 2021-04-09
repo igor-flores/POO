@@ -81,7 +81,9 @@ public class Main extends Application {
     /**
      * Esta interface obriga todos os controllers a receber a tela atual bem como um parametro
      */
-    public interface OnChangeScreen{ void screenChanged(String newScreen, ArrayList<String> userData); }
+    public interface OnChangeScreen{
+        void screenChanged(String newScreen, ArrayList<String> userData);
+    }
 
     /**
      *

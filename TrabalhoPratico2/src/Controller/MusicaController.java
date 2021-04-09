@@ -5,8 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.stage.FileChooser;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -15,13 +15,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class MusicaController extends HomeController{
-    @FXML private Label titulo, descricao, genero, duracao, diretor, ano, atores, idioma;
+public class MusicaController extends UtilMidiaReproducaoController {
+    @FXML private Label interpretes;
 
-    @FXML private Label midiaField, midiaLabel, tituloLabel, anoLabel, descricaoLabel, interpretesLabel, idiomaLabel, generoLabel, alertaBtn;
-    @FXML private TextField tituloField, interpretesField, idiomaField, anoField, generoField;
-    @FXML private TextArea descricaoField;
-    private File selectedFile;
+    @FXML private Label interpretesLabel;
+    @FXML private TextField interpretesField;
     MediaPlayer mediaPlayer;
 
     @FXML protected void initialize(){
@@ -41,12 +39,12 @@ public class MusicaController extends HomeController{
         try {
             titulo.setText("#" + dados.get(0) + " - " + dados.get(1));
             descricao.setText("Descrição: " + dados.get(2));
-//            try {
-//                File file = new File("Assets/musicas/" + dados.get(3));
-//                Media h = new Media(file.toURI().toString());
-//                mediaPlayer = new MediaPlayer(h);
-//                mediaPlayer.play();
-//            }catch (Exception e){ exception(e.getMessage());}
+            try {
+                File file = new File("Assets/musicas/" + dados.get(3));
+                Media h = new Media(file.toURI().toString());
+                mediaPlayer = new MediaPlayer(h);
+                mediaPlayer.play();
+            }catch (Exception e){ exception(e.getMessage());}
 //            mediaPlayer.play();
 
         } catch (Exception e){
@@ -90,45 +88,10 @@ public class MusicaController extends HomeController{
         }
     }
 
-    @FXML void getFile() {
-        FileChooser inputFile = new FileChooser();
-        inputFile.getExtensionFilters().add(
-                new FileChooser.ExtensionFilter("Vídeos", "*.mp3")
-        );
-
-        selectedFile = inputFile.showOpenDialog(null);
-        if(selectedFile != null){
-            midiaField.setText(selectedFile.getAbsolutePath());
-        }
-    }
-
-
     boolean noError(){
-        boolean noError = true;
-        if (tituloField.getText().equals("")){ tituloLabel.setStyle("-fx-text-fill: red"); noError = false; } else tituloLabel.setStyle("-fx-text-fill: black");
-        try {
-            if(Integer.parseInt(anoField.getText()) > 1000 && Integer.parseInt(anoField.getText()) < 3000){
-                anoLabel.setStyle("-fx-text-fill: black");
-            }else { throw new Exception(); } // se der ruim vai para a excessão
-        } catch (Exception e){
-            anoLabel.setStyle("-fx-text-fill: red");
-            noError = false;
-        }
-
-        if (descricaoField.getText().equals("")) {descricaoLabel.setStyle("-fx-text-fill: red"); noError = false;} else {descricaoLabel.setStyle("-fx-text-fill: black");}
-        if (idiomaField.getText().equals("")){ idiomaLabel.setStyle("-fx-text-fill: red"); noError = false; } else idiomaLabel.setStyle("-fx-text-fill: black");
-        if (generoField.getText().equals("")){ generoLabel.setStyle("-fx-text-fill: red"); noError = false; } else generoLabel.setStyle("-fx-text-fill: black");
+        boolean noError = super.noError();
 
         if (interpretesField.getText().equals("")){ interpretesLabel.setStyle("-fx-text-fill: red"); noError = false; } else interpretesLabel.setStyle("-fx-text-fill: black");
-        if (!noError) alertaBtn.setText("Preencha todos os campos corretamente.");
-        else alertaBtn.setText("");
-
-        return noError;
-    }
-    boolean noErrorAll(){
-        boolean noError = noError();
-        if (selectedFile == null) { midiaLabel.setStyle("-fx-text-fill: red"); noError = false;} else midiaLabel.setStyle("-fx-text-fill: black");
-
         if (!noError) alertaBtn.setText("Preencha todos os campos corretamente.");
         else alertaBtn.setText("");
 

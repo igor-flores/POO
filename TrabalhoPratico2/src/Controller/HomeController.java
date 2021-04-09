@@ -9,7 +9,7 @@ import javafx.scene.control.*;
 import Model.*;
 
 
-public class HomeController {
+public class HomeController extends UtilMidiaController {
     @FXML private Tab tabFotos, tabFilmes, tabMusicas;
     @FXML private ListView<String> listaFotos, listaFilmes, listaMusicas;
     @FXML private ChoiceBox<String> filtroFilme, filtroMusica;
@@ -43,7 +43,12 @@ public class HomeController {
         ordenacaoFoto.getItems().addAll(ordenacoes);
         ordenacaoFilme.getItems().addAll(ordenacoes);
         ordenacaoMusica.getItems().addAll(ordenacoes);
-
+        try {
+          filtroMusica.getItems().addAll(Musica.getGeneros());
+          filtroFilme.getItems().addAll(Filme.getGeneros());
+        } catch (SQLException e) {
+            exception(e.getMessage());
+        }
     }
 
     @FXML void visualizar(){
@@ -58,12 +63,10 @@ public class HomeController {
                 String[] split = listaMusicas.getSelectionModel().getSelectedItem().split("-");
                 Main.changeScreen("musicaRead", Musica.readOne(split[0]));
             }
-        } catch (SQLException e){
-            exception(e.getMessage());
         } catch (Exception e){
             exception(e.getMessage());
-//            exception("Você deve selecionar o campo que deseja visualizar");
-        }
+        }//            exception("Você deve selecionar o campo que deseja visualizar");
+
     }
     @FXML void adicionar() {
         if (tabFotos.isSelected()) Main.changeScreen("fotoCreate");
@@ -137,16 +140,8 @@ public class HomeController {
         }
     }
 
-    void exception(String msg){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Puts...");
-        alert.setHeaderText(msg);
-        alert.show();
-    }
-
     @FXML void btnFiltrarFilme() {}
     @FXML void limparFiltroFilme() {}
     @FXML void btnFiltroMusica() { }
 
-    @FXML void voltar() { Main.changeScreen("Home"); iniciaListas(); }
 }

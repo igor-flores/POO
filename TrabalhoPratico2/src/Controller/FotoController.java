@@ -4,7 +4,6 @@ import Model.Connect;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
-import javafx.stage.FileChooser;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
@@ -13,17 +12,15 @@ import java.time.LocalDate;
 import java.time.format.*;
 import java.util.*;
 
-public class FotoController extends HomeController {
+public class FotoController extends UtilMidiaController {
     /** READ */
     @FXML private ImageView img;
-    @FXML private Label titulo, descricao, fotografo, local, data, pessoas;
+    @FXML private Label fotografo, local, data, pessoas;
 
     /** CREATE */
-    @FXML private Label midiaField, midiaLabel, tituloLabel, dataLabel, descricaoLabel, localLabel, fotografoLabel, pessoasLabel, alertaBtn;
-    @FXML private TextField tituloField, localField, fotografoField, pessoasField;
+    @FXML private Label dataLabel, localLabel, fotografoLabel, pessoasLabel;
+    @FXML private TextField localField, fotografoField, pessoasField;
     @FXML private DatePicker dataField;
-    @FXML private TextArea descricaoField;
-    private File selectedFile;
 
     @FXML protected void initialize(){
         Main.setListener((newScreen, userData) -> {
@@ -114,18 +111,6 @@ public class FotoController extends HomeController {
         }
     }
 
-    @FXML void getFile() {
-        FileChooser inputFile = new FileChooser();
-        inputFile.getExtensionFilters().add(
-            new FileChooser.ExtensionFilter("Imagens", "*.jpg", "*.png")
-        );
-
-        selectedFile = inputFile.showOpenDialog(null);
-        if(selectedFile != null){
-            midiaField.setText(selectedFile.getAbsolutePath());
-        }
-    }
-
 
     void clearFields() {
         /* INICIALIZA FIELDS E LABELS */
@@ -142,9 +127,8 @@ public class FotoController extends HomeController {
     }
 
     boolean noError(){
-        boolean noError = true;
+        boolean noError = super.noError();
         if (fotografoField.getText().equals("")){ fotografoLabel.setStyle("-fx-text-fill: red"); noError = false; } else fotografoLabel.setStyle("-fx-text-fill: black");
-        if (tituloField.getText().equals("")){ tituloLabel.setStyle("-fx-text-fill: red"); noError = false; } else tituloLabel.setStyle("-fx-text-fill: black");
         try {
             LocalDate.parse(
                 dataField.getValue().toString(),
@@ -158,7 +142,6 @@ public class FotoController extends HomeController {
         } catch (Exception e){
             dataLabel.setStyle("-fx-text-fill: red"); noError = false;
         }
-        if (descricaoField.getText().equals("")) {descricaoLabel.setStyle("-fx-text-fill: red"); noError = false;} else {descricaoLabel.setStyle("-fx-text-fill: black");}
         if (localField.getText().equals("")){ localLabel.setStyle("-fx-text-fill: red"); noError = false; } else localLabel.setStyle("-fx-text-fill: black");
         if (pessoasField.getText().equals("")){ pessoasLabel.setStyle("-fx-text-fill: red"); noError = false; } else pessoasLabel.setStyle("-fx-text-fill: black");
 
@@ -167,13 +150,5 @@ public class FotoController extends HomeController {
 
         return noError;
     }
-    boolean noErrorAll(){
-        boolean noError = noError();
-        if (selectedFile == null) { midiaLabel.setStyle("-fx-text-fill: red"); noError = false;} else midiaLabel.setStyle("-fx-text-fill: black");
 
-        if (!noError) alertaBtn.setText("Preencha todos os campos corretamente.");
-        else alertaBtn.setText("");
-
-        return noError;
-    }
 }

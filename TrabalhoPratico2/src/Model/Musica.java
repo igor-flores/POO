@@ -57,7 +57,12 @@ public class Musica extends Connect{
         }
     }
 
-    public static ArrayList<String> getGeneros(){
-
+    public static ArrayList<String> getGeneros() throws SQLException {
+        ArrayList<String> array = new ArrayList<>();
+        ResultSet result = read("DISTINCT `genero`", "1", "1");
+        while (result.next()){
+            array.add(result.getString(1));
+        }
+        return array;
     }
 }

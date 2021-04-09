@@ -24,7 +24,6 @@ public class Filme extends Connect implements CRUD{
             }
             i++;
         }
-
     }
 
     public static ArrayList<String> readAll(String orderBy) throws SQLException {
@@ -43,7 +42,6 @@ public class Filme extends Connect implements CRUD{
     }
     static ResultSet read(String campos, String where, String orderBy) throws SQLException {
         String sql = ("SELECT "+ campos +" FROM `filme` INNER JOIN `midia_reproducao` ON `filme`.`midia_reproducao_id_midia` = `midia_reproducao`.`midia_id_midia` INNER JOIN `midia` ON `midia`.`id_midia`=`filme`.`midia_reproducao_id_midia` WHERE " + where + " ORDER BY " + orderBy);
-        assert con != null;
         PreparedStatement prepare = con.prepareStatement(sql);
         return prepare.executeQuery();
     }
@@ -57,5 +55,14 @@ public class Filme extends Connect implements CRUD{
             System.out.println(throwables.getMessage());
             return false;
         }
+    }
+
+    public static ArrayList<String> getGeneros() throws SQLException {
+        ArrayList<String> array = new ArrayList<>();
+        ResultSet result = read("DISTINCT `genero`", "1", "1");
+        while (result.next()){
+            array.add(result.getString(1));
+        }
+        return array;
     }
 }

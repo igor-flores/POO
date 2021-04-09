@@ -31,7 +31,7 @@
             <Label fx:id="ano" layoutX="10.0" layoutY="140.0" text="Ano: " />
             <Label fx:id="atores" layoutX="10.0" layoutY="85.0" text="Atores" />
             <Label fx:id="idioma" layoutX="301.0" layoutY="113.0" text="Idioma" AnchorPane.leftAnchor="300.0" />
-<!--            <MediaView fx:id="movie" fitHeight="200.0" fitWidth="200.0" layoutX="146.0" layoutY="148.0" />-->
+<!--            <MediaView  fx:id="movie" fitHeight="200.0" fitWidth="200.0" layoutX="146.0" layoutY="148.0" />-->
          </children>
       </AnchorPane>
    </center>
