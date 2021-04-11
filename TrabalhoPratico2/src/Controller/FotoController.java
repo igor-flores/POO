@@ -3,10 +3,7 @@ package Controller;
 import Model.Connect;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.image.*;
-import org.apache.commons.io.FileUtils;
 
-import java.io.*;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.*;
@@ -14,7 +11,6 @@ import java.util.*;
 
 public class FotoController extends UtilMidiaController {
     /* READ */
-    @FXML private ImageView img;
     @FXML private Label fotografo, local, data, pessoas;
 
     /* CREATE */
@@ -35,19 +31,14 @@ public class FotoController extends UtilMidiaController {
     @FXML void create() {
         try {
             if (noErrorAll()) {
-                String nomeArquivo = new Date().getTime() + ".jpg";
-                Connect.execute("INSERT INTO `midia`(`titulo`, `descricao`, `caminho_midia`, `data`) VALUES ('" + tituloField.getText() + "', '" + descricaoField.getText() + "', '" + nomeArquivo + "', '" + dataField.getValue() + "'); ");
+                Connect.execute("INSERT INTO `midia`(`titulo`, `descricao`, `caminho_midia`, `data`) VALUES ('" + tituloField.getText() + "', '" + descricaoField.getText() + "', '" + selectedFile.getAbsolutePath() + "', '" + dataField.getValue() + "'); ");
                 int id = Connect.selectId("SELECT MAX(id_midia) FROM midia");
                 Connect.execute("INSERT INTO `foto`(fotografo, local, pessoas, midia_id_midia) VALUES ('" + fotografoField.getText() + "', '" + localField.getText() + "', '" + pessoasField.getText() + "', '" + id + "'); ");
 
-                if(selectedFile != null){
-                    File newFile = new File("src/Assets/fotos/" + nomeArquivo);
-                    FileUtils.copyFile(selectedFile, newFile);
-                }
                 Main.changeScreen("Home");
                 exception("Foto cadastrada com sucesso!");
             }
-        } catch (IOException | ClassNotFoundException | SQLException e) {
+        } catch (ClassNotFoundException | SQLException e) {
             exception("Poxa, houve algum problema... Revise os campos e tente novamente!");
         }
     }
@@ -60,22 +51,23 @@ public class FotoController extends UtilMidiaController {
             fotografo = new Label();
             pessoas = new Label();
             local = new Label();
-            img = new ImageView();
+            caminhoMidia = new Label();
         }
-
         titulo.setText("#" + dados.get(0) + " - " + dados.get(1));
         descricao.setText("Descrição: " + dados.get(2));
+        caminhoMidia.setText("Caminho da Midia: " + dados.get(3));
         data.setText("Data: " + dados.get(4));
         fotografo.setText("Fotógrafo: " + dados.get(5));
-        pessoas.setText("Pessoas: " + dados.get(7));
         local.setText("Local: " + dados.get(6));
-        img.setImage(new Image("Assets/fotos/" + dados.get(3)));
+        pessoas.setText("Pessoas: " + dados.get(7));
     }
 
     void InitializeUpdate(ArrayList<String> dados){
         clearFields();
+        idUpdate = Integer.parseInt(dados.get(0));
         tituloField.setText(dados.get(1));
         descricaoField.setText(dados.get(2));
+        atualMidia = dados.get(3);
         dataField.setValue(LocalDate.parse(dados.get(4)));
         fotografoField.setText(dados.get(5));
         localField.setText(dados.get(6));
@@ -86,27 +78,19 @@ public class FotoController extends UtilMidiaController {
         try{
             if (noError()) {
                 String nomeArquivo;
-
                 if(selectedFile != null){
-                    nomeArquivo = new Date().getTime() + ".jpg";
-                    File newFile = new File("src/Assets/fotos/" + nomeArquivo);
-                    FileUtils.copyFile(selectedFile, newFile);
+                    nomeArquivo = selectedFile.getAbsolutePath();
+                }else{
+                    nomeArquivo = atualMidia;
                 }
 
-//                String nomeArquivo = new Date().getTime() + ".jpg";
-//                Connect.execute("INSERT INTO `midia`(`titulo`, `descricao`, `caminho_midia`, `data`) VALUES ('" + tituloField.getText() + "', '" + descricaoField.getText() + "', '" + nomeArquivo + "', '" + dataField.getValue() + "'); ");
-//                int id = Connect.selectId("SELECT MAX(id_midia) FROM midia");
-//                Connect.execute("INSERT INTO `foto`(fotografo, local, pessoas, midia_id_midia) VALUES ('" + fotografoField.getText() + "', '" + localField.getText() + "', '" + pessoasField.getText() + "', '" + id + "'); ");
-//
-//                if(selectedFile != null){
-//                    File newFile = new File("src/Assets/fotos/" + nomeArquivo);
-//                    FileUtils.copyFile(selectedFile, newFile);
-//                }
-//                Main.changeScreen("Home");
+                Connect.execute("UPDATE `midia` SET `titulo` = '"+ tituloField.getText() +"', `descricao` = '"+ descricaoField.getText() +"', `caminho_midia` = '"+ nomeArquivo +"', `data` = '"+ dataField.getValue() +"' WHERE `id_midia` = " + idUpdate);
+                Connect.execute("UPDATE `foto` SET `fotografo` = '"+ fotografoField.getText() +"', `local` = '"+ localField.getText() +"', `pessoas` = '"+ pessoasField.getText() +"' WHERE `midia_id_midia` = " + idUpdate);
+
+                Main.changeScreen("Home");
                 exception("Foto cadastrada com sucesso!");
             }
-//        } catch (IOException | ClassNotFoundException | SQLException e) {
-        } catch (IOException e) {
+        } catch (ClassNotFoundException | SQLException e) {
             exception(e.getMessage());
         }
     }

@@ -16,8 +16,12 @@ public class HomeController extends UtilMidiaController {
     @FXML private ChoiceBox<String> ordenacaoFoto, ordenacaoFilme, ordenacaoMusica;
 
     @FXML protected void initialize(){
-        iniciaListas();
-        setOrdenacao();
+        Main.setListener((newScreen, userData) -> {
+            if(newScreen.equals("Home")){
+                iniciaListas();
+                setOrdenacao();
+            }
+        });
     }
     void inicializaListViews(){
         if(listaFotos == null) listaFotos = new ListView<>();

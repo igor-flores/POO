@@ -1,12 +1,9 @@
 package Controller;
 
 import javafx.application.Application;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-import java.nio.file.Paths;
 import java.util.*;
 
 import static javafx.fxml.FXMLLoader.*;
@@ -24,30 +21,22 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         stage = primaryStage;
-        primaryStage.setTitle("Trabalho Prático");
+        primaryStage.setTitle("Trabalho Prático 2");
         primaryStage.setMaximized(true);
-
-        /* Bug ao mudar scene
-         * https://stackoverflow.com/questions/41606606/start-the-application-window-maximized-in-javafx-fxml-not-working-properly
-         */
-        Screen screen = Screen.getPrimary();
-        Rectangle2D bounds = screen.getVisualBounds();
-        primaryStage.setWidth(bounds.getWidth());
-        primaryStage.setHeight(bounds.getHeight());
 
         homeScene = new Scene(load(Objects.requireNonNull(getClass().getResource("../View/Home.fxml"))));
 
         fotoCreateScene = new Scene(load(Objects.requireNonNull(getClass().getResource("../View/FotoCreate.fxml"))));
-        fotoReadScene = new Scene(load(Objects.requireNonNull(getClass().getResource("../View/FotoVisualizar.fxml"))));
+        fotoReadScene = new Scene(load(Objects.requireNonNull(getClass().getResource("../View/FotoRead.fxml"))));
         fotoUpdateScene = new Scene(load(Objects.requireNonNull(getClass().getResource("../View/FotoUpdate.fxml"))));
 
-        filmeReadScene = new Scene(load(Objects.requireNonNull(getClass().getResource("../View/FilmeVisualizar.fxml"))));
+        filmeReadScene = new Scene(load(Objects.requireNonNull(getClass().getResource("../View/FilmeRead.fxml"))));
         filmeCreateScene = new Scene(load(Objects.requireNonNull(getClass().getResource("../View/FilmeCreate.fxml"))));
 
         musicaCreateScene = new Scene(load(Objects.requireNonNull(getClass().getResource("../View/MusicaCreate.fxml"))));
         musicaReadScene = new Scene(load(Objects.requireNonNull(getClass().getResource("../View/MusicaRead.fxml"))));
 
-        primaryStage.setScene(homeScene);
+        changeScreen("Home");
         primaryStage.show();
     }
 
@@ -86,7 +75,6 @@ public class Main extends Application {
     }
 
     /**
-     *
      * @param newListener é a interface, assim a lista listeners terá todas os locais que a interface foi implementada
      */
     public static void setListener(OnChangeScreen newListener){ listeners.add(newListener); }

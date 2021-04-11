@@ -10,11 +10,13 @@ import javafx.stage.FileChooser;
 import java.io.File;
 
 class UtilMidiaController {
-    @FXML protected Label titulo, descricao, duracao;
+    @FXML protected Label titulo, descricao, caminhoMidia;
     @FXML protected Label midiaField, midiaLabel, tituloLabel, descricaoLabel, alertaBtn;
     @FXML protected TextField tituloField;
     @FXML protected TextArea descricaoField;
     protected File selectedFile;
+    protected String atualMidia;
+    protected int idUpdate;
 
     @FXML void voltar() { Main.changeScreen("Home"); }
 
