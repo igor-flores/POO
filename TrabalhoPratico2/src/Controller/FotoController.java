@@ -1,8 +1,9 @@
 package Controller;
 
-import Model.Connect;
+import Model.Foto;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.FileChooser;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -11,7 +12,7 @@ import java.util.*;
 
 public class FotoController extends UtilMidiaController {
     /* READ */
-    @FXML private Label fotografo, local, data, pessoas;
+    @FXML private Label fotografo, local, pessoas;
 
     /* CREATE */
     @FXML private Label dataLabel, localLabel, fotografoLabel, pessoasLabel;
@@ -23,7 +24,7 @@ public class FotoController extends UtilMidiaController {
             switch (newScreen){
                 case "fotoCreate": clearFields(); break;
                 case "fotoRead": read(userData); break;
-                case "fotoUpdate": InitializeUpdate(userData); break;
+                case "fotoUpdate": initializeUpdate(userData); break;
             }
         });
     }
@@ -31,10 +32,15 @@ public class FotoController extends UtilMidiaController {
     @FXML void create() {
         try {
             if (noErrorAll()) {
-                Connect.execute("INSERT INTO `midia`(`titulo`, `descricao`, `caminho_midia`, `data`) VALUES ('" + tituloField.getText() + "', '" + descricaoField.getText() + "', '" + selectedFile.getAbsolutePath() + "', '" + dataField.getValue() + "'); ");
-                int id = Connect.selectId("SELECT MAX(id_midia) FROM midia");
-                Connect.execute("INSERT INTO `foto`(fotografo, local, pessoas, midia_id_midia) VALUES ('" + fotografoField.getText() + "', '" + localField.getText() + "', '" + pessoasField.getText() + "', '" + id + "'); ");
-
+                Foto.insert(
+                    tituloField.getText(),
+                    descricaoField.getText(),
+                    selectedFile.getAbsolutePath(),
+                    dataField.getValue().toString(),
+                    fotografoField.getText(),
+                    localField.getText(),
+                    pessoasField.getText()
+                );
                 Main.changeScreen("Home");
                 exception("Foto cadastrada com sucesso!");
             }
@@ -44,25 +50,22 @@ public class FotoController extends UtilMidiaController {
     }
 
     void read(ArrayList<String> dados){
-        if(titulo == null){
-            titulo = new Label();
-            descricao = new Label();
-            data = new Label();
-            fotografo = new Label();
-            pessoas = new Label();
-            local = new Label();
-            caminhoMidia = new Label();
-        }
-        titulo.setText("#" + dados.get(0) + " - " + dados.get(1));
-        descricao.setText("Descrição: " + dados.get(2));
-        caminhoMidia.setText("Caminho da Midia: " + dados.get(3));
-        data.setText("Data: " + dados.get(4));
+        if(fotografo == null) initializeRead();
+        super.read(dados);
+
         fotografo.setText("Fotógrafo: " + dados.get(5));
         local.setText("Local: " + dados.get(6));
         pessoas.setText("Pessoas: " + dados.get(7));
     }
 
-    void InitializeUpdate(ArrayList<String> dados){
+    void initializeRead(){
+        super.initializeRead();
+        fotografo = new Label();
+        pessoas = new Label();
+        local = new Label();
+    }
+
+    void initializeUpdate(ArrayList<String> dados){
         clearFields();
         idUpdate = Integer.parseInt(dados.get(0));
         tituloField.setText(dados.get(1));
@@ -75,39 +78,54 @@ public class FotoController extends UtilMidiaController {
     }
 
     @FXML void update(){
-        try{
-            if (noError()) {
-                String nomeArquivo;
-                if(selectedFile != null){
-                    nomeArquivo = selectedFile.getAbsolutePath();
-                }else{
-                    nomeArquivo = atualMidia;
-                }
-
-                Connect.execute("UPDATE `midia` SET `titulo` = '"+ tituloField.getText() +"', `descricao` = '"+ descricaoField.getText() +"', `caminho_midia` = '"+ nomeArquivo +"', `data` = '"+ dataField.getValue() +"' WHERE `id_midia` = " + idUpdate);
-                Connect.execute("UPDATE `foto` SET `fotografo` = '"+ fotografoField.getText() +"', `local` = '"+ localField.getText() +"', `pessoas` = '"+ pessoasField.getText() +"' WHERE `midia_id_midia` = " + idUpdate);
+        if (noError()) {
+            String nomeArquivo;
+            if(selectedFile != null) nomeArquivo = selectedFile.getAbsolutePath();
+            else nomeArquivo = atualMidia;
+            try{
+                Foto.update(
+                    tituloField.getText(),
+                    descricaoField.getText(),
+                    nomeArquivo,
+                    dataField.getValue().toString(),
+                    fotografoField.getText(),
+                    localField.getText(),
+                    pessoasField.getText(),
+                    idUpdate
+                );
 
                 Main.changeScreen("Home");
-                exception("Foto cadastrada com sucesso!");
+                exception("Foto atualizada com sucesso!");
+            } catch (ClassNotFoundException | SQLException e) {
+                exception(e.getMessage());
             }
-        } catch (ClassNotFoundException | SQLException e) {
-            exception(e.getMessage());
         }
     }
-
 
     void clearFields() {
         /* INICIALIZA FIELDS E LABELS */
         if (midiaLabel == null) {
-            midiaLabel = new Label(); tituloLabel = new Label(); dataLabel = new Label(); descricaoLabel = new Label(); localLabel = new Label(); fotografoLabel = new Label(); pessoasLabel = new Label(); alertaBtn = new Label();
-            midiaField = new Label(); tituloField = new TextField(); dataField = new DatePicker(); descricaoField = new TextArea(); localField = new TextField(); fotografoField = new TextField(); pessoasField = new TextField();
+            super.clearFields();
+            localLabel = new Label(); fotografoLabel = new Label(); pessoasLabel = new Label();
+            localField = new TextField(); fotografoField = new TextField(); pessoasField = new TextField(); dataField = new DatePicker();
         }
 
         /* SETA / LIMPA TEXTOS */
-        selectedFile = null;
-        midiaLabel.setText("Midia"); tituloLabel.setText("Titulo"); dataLabel.setText("Data"); descricaoLabel.setText("Descrição: "); localLabel.setText("Local"); fotografoLabel.setText("Fotografo"); pessoasLabel.setText("Pessoas"); alertaBtn.setText("");
-        midiaLabel.setStyle("-fx-text-fill: black"); tituloLabel.setStyle("-fx-text-fill: black"); dataLabel.setStyle("-fx-text-fill: black"); descricaoLabel.setStyle("-fx-text-fill: black"); localLabel.setStyle("-fx-text-fill: black"); fotografoLabel.setStyle("-fx-text-fill: black"); pessoasLabel.setStyle("-fx-text-fill: black");
-        midiaField.setText("Selecionar foto"); tituloField.setText(""); dataField.setValue(null); descricaoField.setText(""); localField.setText(""); fotografoField.setText(""); pessoasField.setText("");
+        localLabel.setText("Local"); fotografoLabel.setText("Fotografo"); pessoasLabel.setText("Pessoas"); alertaBtn.setText("");
+        localLabel.setStyle("-fx-text-fill: black"); fotografoLabel.setStyle("-fx-text-fill: black"); pessoasLabel.setStyle("-fx-text-fill: black");
+        localField.setText(""); fotografoField.setText(""); pessoasField.setText("");
+    }
+
+    @FXML void getFile() {
+        FileChooser inputFile = new FileChooser();
+        inputFile.getExtensionFilters().add(
+            new FileChooser.ExtensionFilter("Imagens", "*.jpg", "*.png")
+        );
+
+        selectedFile = inputFile.showOpenDialog(null);
+        if(selectedFile != null)
+            midiaField.setText(selectedFile.getAbsolutePath());
+
     }
 
     boolean noError(){

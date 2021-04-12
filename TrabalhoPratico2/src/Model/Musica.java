@@ -9,7 +9,7 @@ public class Musica extends Connect{
     public static ArrayList<String> readOne(String id) throws SQLException {
         ArrayList<String> array = new ArrayList<>();
         ResultSet result = read(
-            "`id_midia`, `titulo`, `descricao`, `caminho_midia`",
+                "`id_midia`, `titulo`, `descricao`, `caminho_midia`, Year(data), genero, idioma, interpretes",
             "id_midia = " + id,
             "1"
         );
@@ -64,5 +64,21 @@ public class Musica extends Connect{
             array.add(result.getString(1));
         }
         return array;
+    }
+
+    public static void create(
+        String  titulo,
+        String  descricao,
+        String  nomeArquivo,
+        String  data,
+        String  genero,
+        String  idioma,
+        String  interpretes
+    ) throws SQLException, ClassNotFoundException {
+        Connect.execute("INSERT INTO `midia`(`titulo`, `descricao`, `caminho_midia`, `data`) VALUES ('" + titulo + "', '" + descricao + "', '" + nomeArquivo + "', '" + data + "-01-01'); ");
+        int id = Connect.selectId("SELECT MAX(id_midia) FROM midia");
+        Connect.execute("INSERT INTO `midia_reproducao`(genero, idioma, midia_id_midia) VALUES ('" + genero + "', '" + idioma + "', '" + id + "'); ");
+        Connect.execute("INSERT INTO `musica`(interpretes, midia_reproducao_id_midia) VALUES ('" + interpretes + "', '" + id + "'); ");
+
     }
 }

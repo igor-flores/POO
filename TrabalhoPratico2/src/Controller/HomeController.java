@@ -44,6 +44,10 @@ public class HomeController extends UtilMidiaController {
 
     void setOrdenacao(){
         String[] ordenacoes = {"Código 1-9", "Código 9-1", "Titulo A-Z", "Titulo Z-A", "Data mais recente", "Data mais antiga"};
+        ordenacaoFoto.getItems().clear();
+        ordenacaoFilme.getItems().clear();
+        ordenacaoMusica.getItems().clear();
+
         ordenacaoFoto.getItems().addAll(ordenacoes);
         ordenacaoFilme.getItems().addAll(ordenacoes);
         ordenacaoMusica.getItems().addAll(ordenacoes);

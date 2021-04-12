@@ -40,13 +40,32 @@ public class Foto extends Connect {
         return prepare.executeQuery();
     }
 
-    public static boolean delete(String id){
-        String sql = "DELETE FROM `midia` WHERE `id_midia` = " + id + "; ";
-        try {
-            execute(sql);
-            return true;
-        } catch (SQLException | ClassNotFoundException throwables) {
-            return false;
-        }
+    public static void update(
+        String titulo,
+        String descricao,
+        String nomeArquivo,
+        String data,
+        String fotografo,
+        String local,
+        String pessoas,
+        int idUpdate
+    ) throws SQLException, ClassNotFoundException {
+        Connect.execute("UPDATE `midia` SET `titulo` = '"+ titulo +"', `descricao` = '"+ descricao +"', `caminho_midia` = '"+ nomeArquivo +"', `data` = '"+ data +"' WHERE `id_midia` = " + idUpdate);
+        Connect.execute("UPDATE `foto` SET `fotografo` = '"+ fotografo +"', `local` = '"+ local +"', `pessoas` = '"+ pessoas +"' WHERE `midia_id_midia` = " + idUpdate);
     }
+
+    public static void insert(
+        String titulo,
+        String descricao,
+        String nomeArquivo,
+        String data,
+        String fotografo,
+        String local,
+        String pessoas
+    ) throws SQLException, ClassNotFoundException {
+        Connect.execute("INSERT INTO `midia`(`titulo`, `descricao`, `caminho_midia`, `data`) VALUES ('" + titulo + "', '" + descricao + "', '" + nomeArquivo + "', '" + data + "'); ");
+        int id = Connect.selectId("SELECT MAX(id_midia) FROM midia");
+        Connect.execute("INSERT INTO `foto`(fotografo, local, pessoas, midia_id_midia) VALUES ('" + fotografo + "', '" + local + "', '" + pessoas + "', '" + id + "'); ");
+    }
+
 }

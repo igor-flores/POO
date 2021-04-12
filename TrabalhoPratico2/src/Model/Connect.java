@@ -26,4 +26,15 @@ public class Connect {
     public static void execute(String sql) throws SQLException, ClassNotFoundException {
         con.prepareStatement(sql).execute();
     }
+
+    public static boolean delete(String id){
+        String sql = "DELETE FROM `midia` WHERE `id_midia` = " + id + "; ";
+        try {
+            execute(sql);
+            return true;
+        } catch (SQLException | ClassNotFoundException throwables) {
+            System.out.println(throwables.getMessage());
+            return false;
+        }
+    }
 }

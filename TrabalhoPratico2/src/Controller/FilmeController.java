@@ -1,16 +1,14 @@
 package Controller;
 
 import Model.Connect;
+import Model.Filme;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import org.apache.commons.io.FileUtils;
+import javafx.stage.FileChooser;
 
-import java.io.File;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class FilmeController extends UtilMidiaReproducaoController {
     @FXML private Label diretor, atores;
@@ -22,45 +20,34 @@ public class FilmeController extends UtilMidiaReproducaoController {
         Main.setListener((newScreen, userData) -> {
             switch (newScreen){
                 case "filmeCreate": clearFields(); break;
-                case "filmeRead": view(userData); break;
+                case "filmeRead": read(userData); break;
             }
         });
     }
 
-    void view(ArrayList<String> dados){
-        if(titulo == null){
-            titulo = new Label();
-            descricao = new Label();
-        }
-        try {
-            titulo.setText("#" + dados.get(0) + " - " + dados.get(1));
-            descricao.setText("Descrição: " + dados.get(2));
-//            try {
-//                File file = new File("Assets/filmes/" + dados.get(3));
-//                String path = file.getAbsolutePath();
-//                media = new Media(new File(path).toURI().toString());
-//                mediaPlayer = new MediaPlayer(media);
-//                movie.setMediaPlayer(mediaPlayer);
-//
-//                mediaPlayer.play();
-//            }catch (Exception e){
-//                exception(e.getMessage());
-//            }
+    void read(ArrayList<String> dados){
+        for(String dado: dados)
+            System.out.println(dado);
 
-
-        } catch (Exception e){
-//            Main.changeScreen("Home");
-//            exception(e.getMessage());
-//            exception("Poxa, houve um problema :/");
-        }
+        System.out.println("\n\n\n");
+        if (titulo == null) initializeRead();
+        super.read(dados);
+        diretor.setText("Diretor: " + dados.get(7));
+        atores.setText("Atores: " + dados.get(8));
+    }
+    void initializeRead(){
+        super.initializeRead();
+        diretor = new Label();
+        atores = new Label();
     }
 
     void clearFields(){
-        super.clearFields();
-
         /* INICIALIZA FIELDS E LABELS */
-        diretorField = new TextField(); atoresField = new TextField();
-        diretorLabel = new Label(); atoresLabel = new Label();
+        if(midiaLabel == null){
+            super.clearFields();
+            diretorField = new TextField(); atoresField = new TextField();
+            diretorLabel = new Label(); atoresLabel = new Label();
+        }
 
         /* SETA / LIMPA TEXTOS */
         diretorLabel.setStyle("-fx-text-fill: black"); atoresLabel.setStyle("-fx-text-fill: black");
@@ -71,22 +58,35 @@ public class FilmeController extends UtilMidiaReproducaoController {
     @FXML void create() {
         try {
             if (noErrorAll()) {
-                String nomeArquivo = new Date().getTime() + ".mp4";
-                Connect.execute("INSERT INTO `midia`(`titulo`, `descricao`, `caminho_midia`, `data`) VALUES ('" + tituloField.getText() + "', '" + descricaoField.getText() + "', '" + nomeArquivo + "', '" + anoField.getText() + "-01-01'); ");
-                int id = Connect.selectId("SELECT MAX(id_midia) FROM midia");
-                Connect.execute("INSERT INTO `midia_reproducao`(genero, idioma, midia_id_midia) VALUES ('" + generoField.getText() + "', '" + idiomaField.getText() + "', '" + id + "'); ");
-                Connect.execute("INSERT INTO `filme`(diretor, atores, midia_reproducao_id_midia) VALUES ('" + diretorField.getText() + "', '" + atoresField.getText() + "', '" + id + "'); ");
+                Filme.create(
+                    tituloField.getText(),
+                    descricaoField.getText(),
+                    selectedFile.getAbsolutePath(),
+                    anoField.getText(),
+                    generoField.getText(),
+                    idiomaField.getText(),
+                    diretorField.getText(),
+                    atoresField.getText()
+                );
 
-                if(selectedFile != null){
-                    File newFile = new File("src/Assets/filmes/" + nomeArquivo);
-                    FileUtils.copyFile(selectedFile, newFile);
-                }
                 Main.changeScreen("Home");
                 exception("Filme cadastrada com sucesso!");
             }
-        } catch (IOException | ClassNotFoundException | SQLException e) {
+        } catch (ClassNotFoundException | SQLException e) {
             exception("Poxa, houve algum problema... Revise os campos e tente novamente!");
         }
+    }
+
+    @FXML void getFile() {
+        FileChooser inputFile = new FileChooser();
+        inputFile.getExtensionFilters().add(
+            new FileChooser.ExtensionFilter("Filmes", "*.mp4", "*.mkv", "*.avi")
+        );
+
+        selectedFile = inputFile.showOpenDialog(null);
+        if(selectedFile != null)
+            midiaField.setText(selectedFile.getAbsolutePath());
+
     }
 
     boolean noError(){
